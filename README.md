@@ -1,5 +1,4 @@
-# final_project
-
+# Recipe App
 A new Flutter project.
 
 ## Getting Started
