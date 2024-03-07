@@ -4,8 +4,6 @@ import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
 
-
-
 class Transition extends StatefulWidget {
   static const routeName = "Transition";
 
@@ -22,43 +20,38 @@ class _TransitionState extends State<Transition> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: tabs[selectedIndex],
-      floatingActionButton: FloatingActionButton(
-
-        onPressed: (){},
-        child:Icon(Icons.search_rounded)
-
-      ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedFontSize: 12.0,
           unselectedFontSize: 12.0,
           currentIndex: selectedIndex,
-          onTap: (index){
+          onTap: (index) {
             selectedIndex = index;
-            setState((){
-            });
+            setState(() {});
           },
-          items:const [
-        BottomNavigationBarItem(
-          icon: Padding(
-            padding: EdgeInsets.all(3.0),
-            child: ImageIcon(AssetImage("assets/icons/Home.png"),),
-          ),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
-          label: "Favorite",
-        ),
-        BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage("assets/icons/Profile.png")),
-          label: "Profile",
-        ),
+          items: const [
+            BottomNavigationBarItem(
+              icon: Padding(
+                padding: EdgeInsets.all(3.0),
+                child: ImageIcon(
+                  AssetImage("assets/icons/Home.png"),
+                ),
+              ),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: "Favorite",
+            ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage("assets/icons/Profile.png")),
+              label: "Profile",
+            ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_rounded),
               label: "Settings",
             ),
-      ]),
+          ]),
     );
   }
 }

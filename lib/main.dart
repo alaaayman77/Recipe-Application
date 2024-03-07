@@ -1,4 +1,3 @@
-import 'package:final_project/OTP/otp.dart';
 import 'package:final_project/favorite_page/favorite_page.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/profile_page/profile_page.dart';
@@ -16,7 +15,7 @@ void main() {
 class MyApp extends StatelessWidget {
   int selectedIndex = 0;
 
-   MyApp({super.key});
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -27,14 +26,11 @@ class MyApp extends StatelessWidget {
       routes: {
         SignIn.routeName:(context) => SignIn(),
         SignUp.routeName:(context) => SignUp(),
-        OTP.routeName:(context) => OTP(),
         Transition.routeName:(context) => Transition(),
         FavoritePage.routeName:(context) =>  FavoritePage(),
         ProfilePage.routeName:(context)=> ProfilePage(),
         HomePage.routeName:(context)=> HomePage(),
         SettingsPage.routeName:(context)=> SettingsPage(),
-
-
       },
       theme: Theming.lightTheme,
       // darkTheme: Theming.DarkTheme,
