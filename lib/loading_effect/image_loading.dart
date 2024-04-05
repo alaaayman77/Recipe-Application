@@ -11,7 +11,7 @@ class ImageLoading extends StatelessWidget {
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade200,
       child: Container(
-        width: 100,
+        width:double.infinity,
         height: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
