@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class CustomTab extends StatelessWidget{
   bool selectedItem;
   var sources;
-  CustomTab({required this.selectedItem,required this.sources});
+  CustomTab({super.key, required this.selectedItem,required this.sources});
   @override
   Widget build(BuildContext context) {
 return Container(
-  padding: EdgeInsets.symmetric(horizontal:20,vertical:7),
-  margin: EdgeInsets.symmetric(vertical: 10),
+  padding: const EdgeInsets.symmetric(horizontal:20,vertical:7),
+  margin: const EdgeInsets.symmetric(vertical: 10),
   decoration: BoxDecoration(
       color: selectedItem==false ? Theming.form :Theming.primary,
       borderRadius: BorderRadius.circular(30),

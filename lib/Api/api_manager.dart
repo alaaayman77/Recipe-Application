@@ -22,7 +22,7 @@ class ApiManager{
       var json = jsonDecode(bodyString);
       return RandomRecipeResponse.fromJson(json);
     } catch (e) {
-      throw e;
+      rethrow;
     }
   }
 }

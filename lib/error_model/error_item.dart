@@ -1,5 +1,3 @@
-import 'package:final_project/Api/api_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ErrorItem extends StatefulWidget {
@@ -20,7 +18,7 @@ class _ErrorItemState extends State<ErrorItem> {
           width: 250,
           height: 250,
           decoration: BoxDecoration(
-              color: Color.fromRGBO(255, 0, 0, 0.2),
+              color: const Color.fromRGBO(255, 0, 0, 0.2),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
@@ -34,23 +32,23 @@ class _ErrorItemState extends State<ErrorItem> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.error,
                   color: Colors.red,
                   size: 50.0,
                 ),
-                SizedBox(height: 10.0),
-                Text(
+                const SizedBox(height: 10.0),
+                const Text(
                   'Error Occurred!',
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Text(
                   widget.errormessage ?? "",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
@@ -58,7 +56,7 @@ class _ErrorItemState extends State<ErrorItem> {
                       backgroundColor: Colors.white70,
                     ),
                     onPressed: widget.error,
-                    child: Text(
+                    child: const Text(
                       "Try Again",
                       style: TextStyle(color: Colors.black),
                     ))

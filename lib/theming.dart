@@ -11,7 +11,7 @@ class Theming {
   static Color white = const Color(0xffFFFFFF);
 
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: Color(0xffF4F5F7),
+    scaffoldBackgroundColor: const Color(0xffF4F5F7),
     primaryColor: primary,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,

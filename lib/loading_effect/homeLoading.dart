@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -25,7 +24,7 @@ class HomeLoading extends StatelessWidget {
                 ),
               ),
             ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Shimmer.fromColors(
                   baseColor: Colors.grey.shade300,
                   highlightColor: Colors.grey.shade200,
@@ -38,7 +37,7 @@ class HomeLoading extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Shimmer.fromColors(
                   baseColor: Colors.grey.shade300,
                   highlightColor: Colors.grey.shade200,
