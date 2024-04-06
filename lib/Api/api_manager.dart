@@ -9,8 +9,8 @@ class ApiManager{
   static Future<RandomRecipeResponse?> getRandomRecipe({tags=''}) async {
     Uri url = Uri.https(ApiConstants.baseUrl, ApiConstants.randomRecipeApi,
         {
-          "apiKey":"d6bc8f232b984351a3dac4324ea2227d",
-          // "apiKey": "73f34b466856436e978b5cc90412f0d0",
+          // "apiKey":"d6bc8f232b984351a3dac4324ea2227d",
+          "apiKey": "73f34b466856436e978b5cc90412f0d0",
           "number":"100",
           "tags":tags
         });

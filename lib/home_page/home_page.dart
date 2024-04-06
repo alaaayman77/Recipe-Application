@@ -11,37 +11,27 @@ import 'package:final_project/theming.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  List<String>? dishTypes;
+  int? selected;
+  HomePage({ this.dishTypes ,  this.selected});
   static const routeName = "HomePage";
-
-  const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> dishTypes = [
-    "All",
-    "main course",
-    "side dish",
-    "dessert",
-    "appetizer",
-    "salad",
-    "breakfast",
-    "lunch",
-    "dinner"
-  ];
-  int selected = 0;
+
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         SafeArea(
-          child: DishTabs(dishTypes:dishTypes,selected: selected,)
+          child: DishTabs()
         ),
         Expanded(
           child: FutureBuilder<RandomRecipeResponse?>(
-              future: ApiManager.getRandomRecipe(tags:selected==0?"":dishTypes[selected]),
+              future: ApiManager.getRandomRecipe(tags:widget.selected==0?"":widget.dishTypes?[widget.selected??0]),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return GridView.builder(

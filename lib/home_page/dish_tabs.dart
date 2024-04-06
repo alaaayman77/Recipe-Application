@@ -1,11 +1,22 @@
 import 'package:final_project/home_page/custom_tab.dart';
+import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/theming.dart';
 import 'package:flutter/material.dart';
 
 class DishTabs extends StatefulWidget{
-  List<String> dishTypes;
-  int selected;
-  DishTabs({required this.dishTypes,required this.selected});
+  List<String> dishTypes = [
+    "All",
+    "main course",
+    "side dish",
+    "dessert",
+    "appetizer",
+    "salad",
+    "breakfast",
+    "lunch",
+    "dinner"
+  ];
+  int selected = 0;
+
 
   @override
   State<DishTabs> createState() => _DishTabsState();
@@ -57,6 +68,7 @@ return Container(
         child: TabBar(
             onTap: (index) {
               widget.selected = index;
+              HomePage(dishTypes:widget.dishTypes,selected:widget.selected,);
               setState(() {});
             },
             isScrollable: true,
