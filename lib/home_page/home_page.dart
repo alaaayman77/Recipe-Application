@@ -1,16 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project/Api/api_constants.dart';
 import 'package:final_project/Api/api_manager.dart';
 import 'package:final_project/error_model/error_item.dart';
-import 'package:final_project/favorite_page/favorite_page.dart';
 import 'package:final_project/home_page/custom_tab.dart';
 import 'package:final_project/home_page/save_item.dart';
 import 'package:final_project/loading_effect/homeLoading.dart';
 import 'package:final_project/loading_effect/image_loading.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/theming.dart';
-import 'package:final_project/transition/transition.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
