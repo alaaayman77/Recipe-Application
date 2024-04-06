@@ -1,16 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:final_project/Api/api_constants.dart';
 import 'package:final_project/Api/api_manager.dart';
 import 'package:final_project/error_model/error_item.dart';
-import 'package:final_project/favorite_page/favorite_page.dart';
 import 'package:final_project/home_page/custom_tab.dart';
+import 'package:final_project/home_page/dish_tabs.dart';
 import 'package:final_project/home_page/save_item.dart';
 import 'package:final_project/loading_effect/homeLoading.dart';
 import 'package:final_project/loading_effect/image_loading.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/theming.dart';
-import 'package:final_project/transition/transition.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,69 +37,7 @@ class _HomePageState extends State<HomePage> {
     return Column(
       children: [
         SafeArea(
-          child: Container(
-            height: MediaQuery.sizeOf(context).height * 0.23 ,
-            color:Theming.white ,
-            child:Column(
-              children: [
-                SizedBox(height: 10,),
-                   Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.person,
-                            color: Theming.secondaryText,
-                            size:35
-                          )),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal:15),
-                          child: TextFormField(
-                            onTap: (){
-                            },
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none),
-                                hintText: "Search",
-                                hintStyle:TextStyle(color: Theming.secondaryText,fontSize:20) ,
-                                prefixIcon: Icon(Icons.search,size:30),
-                                filled: true,
-                                fillColor: Theming.form,
-                                enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none)
-                            ),
-
-                          ),
-                        ),
-                      ),
-
-                    ],
-                  ),
-                SizedBox(height: 10,),
-                DefaultTabController(
-                  length: dishTypes.length,
-                  child: TabBar(
-                      onTap: (index) {
-                        selected = index;
-                        setState(() {});
-                      },
-                      isScrollable: true,
-                      indicatorColor: Colors.transparent,
-                      tabs:
-                      dishTypes
-                          .map((source) => CustomTab(
-                          selectedItem:
-                          selected == dishTypes.indexOf(source)
-                              ? true
-                              : false,
-                          sources: dishTypes[dishTypes.indexOf(source)]))
-                          .toList()
-                  ),
-                )
-
-
-              ],
-            ),
-          ),
+          child: DishTabs(dishTypes:dishTypes,selected: selected,)
         ),
         Expanded(
           child: FutureBuilder<RandomRecipeResponse?>(
