@@ -25,5 +25,4 @@ class ApiManager{
       throw e;
     }
   }
-
 }
