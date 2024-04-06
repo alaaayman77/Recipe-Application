@@ -9,8 +9,6 @@ class HomeLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return
         Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +54,6 @@ class HomeLoading extends StatelessWidget {
 
               ],
             ),
-          ),
         );
   }
 }
