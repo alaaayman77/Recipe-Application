@@ -10,6 +10,7 @@ import 'package:final_project/home_page/save_item.dart';
 import 'package:final_project/loading_effect/homeLoading.dart';
 import 'package:final_project/loading_effect/image_loading.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
+import 'package:final_project/search/custom_search.dart';
 import 'package:final_project/theming.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +45,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
 
     return
-       Column(
-         crossAxisAlignment: CrossAxisAlignment.center,
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SafeArea(
             child: Container(
@@ -54,34 +55,39 @@ class _HomePageState extends State<HomePage> {
               child:Column(
                 children: [
                   const SizedBox(height: 10,),
-                     Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: Icon(
+                  Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {},
+                          icon: Icon(
                               Icons.person,
                               color: Theming.secondaryText,
                               size:35
-                            )),
-                        Expanded(
-                            child: TextFormField(
-                              onTap: (){
-                              },
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none),
-                                  hintText: "Search",
-                                  hintStyle:TextStyle(color: Theming.secondaryText,fontSize:20) ,
-                                  prefixIcon: const Icon(Icons.search,size:30),
-                                  filled: true,
-                                  fillColor: Theming.form,
-                                  enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none)
-                              ),
+                          )),
+                      Expanded(
+                        child: TextFormField(
+                          readOnly: true,
+                          onTap: (){
+                            showSearch(context: context, delegate:CustomSearch());
+                            setState(() {
 
-                            ),
+                            });
+                          },
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none),
+                              hintText: "Search",
+                              hintStyle:TextStyle(color: Theming.secondaryText,fontSize:20) ,
+                              prefixIcon: Icon(Icons.search,size:30,color:Theming.secondaryText),
+                              filled: true,
+                              fillColor: Theming.form,
+                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none)
+                          ),
 
                         ),
-                      ],
-                    ),
+
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 10,),
                   DefaultTabController(
                     length: dishTypes.length,
@@ -111,10 +117,10 @@ class _HomePageState extends State<HomePage> {
 
           ),
 
-             Padding(
-               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-               child: Text("Popular Recipes",style: Theme.of(context).textTheme.titleLarge,),
-             ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text("Popular Recipes",style: Theme.of(context).textTheme.titleLarge,),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 10),
@@ -159,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                     var recipes = snapshot.data?.recipes;
 
                     return
-                       GridView.builder(
+                      GridView.builder(
                           itemCount: recipes?.length,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -171,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 RecipeImage(recipe: recipes?[index],dim: "636x393"),
-                                 RecipeDescrption(recipe: recipes?[index]),
+                                RecipeDescrption(recipe: recipes?[index]),
                               ],
                             );
                           });
