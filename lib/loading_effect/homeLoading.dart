@@ -7,8 +7,8 @@ class HomeLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-        Center(
-            child: Column(
+        // Center(
+           Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -52,7 +52,7 @@ class HomeLoading extends StatelessWidget {
                 ),
 
               ],
-            ),
+            // ),
         );
   }
 }

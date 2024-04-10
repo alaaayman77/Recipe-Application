@@ -75,6 +75,8 @@ class RandomRecipeResponse {
 class Recipes {
   Recipes({
 
+    // this.isFavorite = false,
+
       this.vegetarian, 
       this.vegan, 
       this.glutenFree, 
@@ -113,7 +115,7 @@ class Recipes {
       this.spoonacularSourceUrl,});
 
   Recipes.fromJson(dynamic json) {
-
+    // isFavorite = json['isFavorite'];
 
     vegetarian = json['vegetarian'];
     vegan = json['vegan'];
@@ -139,6 +141,8 @@ class Recipes {
         extendedIngredients?.add(ExtendedIngredients.fromJson(v));
       });
     }
+    // isFavorite = json['isFavorite'];
+
     id = json['id'];
     title = json['title'];
     readyInMinutes = json['readyInMinutes'];
@@ -174,7 +178,7 @@ class Recipes {
   }
 
 
-
+// bool? isFavorite;
   bool? vegetarian;
   bool? vegan;
   bool? glutenFree;
@@ -214,6 +218,8 @@ class Recipes {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    // map['isFavorite'] = isFavorite;
+
     map['vegetarian'] = vegetarian;
     map['vegan'] = vegan;
     map['glutenFree'] = glutenFree;
