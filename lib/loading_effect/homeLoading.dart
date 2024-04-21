@@ -6,8 +6,7 @@ class HomeLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Center(
+    return // Center(
            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

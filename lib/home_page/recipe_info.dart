@@ -2,10 +2,10 @@ import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RecipeDescrption extends StatelessWidget {
+class RecipeInfo extends StatelessWidget {
   Recipes? recipe;
 
-  RecipeDescrption({super.key,required this.recipe});
+  RecipeInfo({super.key,required this.recipe});
 
   @override
   Widget build(BuildContext context) {

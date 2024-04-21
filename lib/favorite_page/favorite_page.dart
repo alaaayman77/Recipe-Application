@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/firebase_utils/FirebaseUtils.dart';
-import 'package:final_project/home_page/recipe_descrption.dart';
+import 'package:final_project/home_page/recipe_info.dart';
 import 'package:final_project/home_page/recipe_image.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/provider/favorite_provider.dart';
@@ -40,7 +40,7 @@ class _FavoritePageState extends State<FavoritePage> {
                           children: [
                             RecipeImage(recipe: provider.recipes[index],dim: "312x231"),
                             const SizedBox(width: 20),
-                            RecipeDescrption(recipe: provider.recipes[index]),
+                            RecipeInfo(recipe: provider.recipes[index]),
                           ],
                         );
                     }),

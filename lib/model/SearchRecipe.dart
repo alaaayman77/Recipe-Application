@@ -69,7 +69,7 @@ class Results {
     imageType = json['imageType'];
   }
 
-  num? id;
+  int? id;
   String? title;
   String? image;
   String? imageType;

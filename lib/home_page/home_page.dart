@@ -4,7 +4,7 @@ import 'package:final_project/Api/api_manager.dart';
 import 'package:final_project/error_model/error_item.dart';
 import 'package:final_project/firebase_utils/FirebaseUtils.dart';
 import 'package:final_project/home_page/custom_tab.dart';
-import 'package:final_project/home_page/recipe_descrption.dart';
+import 'package:final_project/home_page/recipe_info.dart';
 import 'package:final_project/home_page/recipe_image.dart';
 import 'package:final_project/home_page/save_item.dart';
 import 'package:final_project/loading_effect/homeLoading.dart';
@@ -14,6 +14,8 @@ import 'package:final_project/search/custom_search.dart';
 import 'package:final_project/theming.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import '../recipe_description/recipe_details.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "HomePage";
@@ -173,12 +175,18 @@ class _HomePageState extends State<HomePage> {
                             mainAxisSpacing: 10,
                           ),
                           itemBuilder: (context, index) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                RecipeImage(recipe: recipes?[index],dim: "636x393"),
-                                RecipeDescrption(recipe: recipes?[index]),
-                              ],
+                            return GestureDetector(
+                              onTap: (){
+
+                                Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments : recipes?[index]);
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RecipeImage(recipe: recipes?[index],dim: "636x393"),
+                                  RecipeInfo(recipe: recipes?[index]),
+                                ],
+                              ),
                             );
                           });
 

@@ -4,6 +4,7 @@ import 'package:final_project/favorite_page/favorite_page.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/provider/favorite_provider.dart';
+import 'package:final_project/recipe_description/recipe_details.dart';
 import 'package:final_project/settings_page/settings_page.dart';
 import 'package:final_project/sign_in/sign_in.dart';
 import 'package:final_project/sign_up/sign_up.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
           ProfilePage.routeName: (context) => const ProfilePage(),
           HomePage.routeName: (context) => const HomePage(),
           SettingsPage.routeName: (context) => const SettingsPage(),
+          RecipeDetails.routeName: (context) =>  RecipeDetails(),
         },
         theme: Theming.lightTheme,
         // darkTheme: Theming.DarkTheme,

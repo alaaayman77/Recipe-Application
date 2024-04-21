@@ -29,6 +29,22 @@ class Theming {
         fontWeight: FontWeight.bold,
         color: deepBlue,
       ),
+      titleMedium: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: deepBlue,
+      ),
+      bodyLarge: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: deepBlue,
+      ),
+
+      bodyMedium: TextStyle(
+          fontSize: 18,
+          color: secondaryText
+      ),
+
 
       bodySmall: TextStyle(
         fontSize: 15,
