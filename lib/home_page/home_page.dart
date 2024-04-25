@@ -51,8 +51,9 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SafeArea(
+            // maintainBottomViewPadding: false,
             child: Container(
-              height: MediaQuery.sizeOf(context).height * 0.23 ,
+              height: MediaQuery.sizeOf(context).height * 0.20 ,
               color:Theming.white ,
               child:Column(
                 children: [
@@ -92,8 +93,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 10,),
                   DefaultTabController(
+
                     length: dishTypes.length,
                     child: TabBar(
+                      indicator: null,
                         onTap: (index) {
                           selected = index;
                           setState(() {});
@@ -183,7 +186,16 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  RecipeImage(recipe: recipes?[index],dim: "636x393"),
+                                  Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      RecipeImage(id: recipes?[index].id,dim: "636x393"),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: saveItem(recipe:recipes?[index]),
+                                      ),
+                                    ],
+                                  ),
                                   RecipeInfo(recipe: recipes?[index]),
                                 ],
                               ),

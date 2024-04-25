@@ -1,11 +1,19 @@
 
 
+import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/search/search_results.dart';
 import 'package:final_project/theming.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomSearch extends SearchDelegate {
+@override
+  // TODO: implement searchFieldStyle
+//   TextStyle? get searchFieldStyle {
+//   return
+// };
+
+
 
   // @override
   // // TODO: implement searchFieldDecorationTheme
@@ -17,17 +25,19 @@ class CustomSearch extends SearchDelegate {
   //       enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide(style: BorderStyle.none)),
   //       border: OutlineInputBorder(borderRadius: BorderRadius.circular(25)));
   // }
+
   @override
   ThemeData appBarTheme(BuildContext context) {
     searchFieldDecorationTheme;
     return ThemeData(
-
+      scaffoldBackgroundColor: Theming.form,
       appBarTheme: AppBarTheme(
           toolbarHeight: MediaQuery
               .sizeOf(context)
               .height * 0.2,
           elevation: 0,
-          color: Theming.white),
+          color: Theming.form),
+
     );
   }
 
@@ -56,9 +66,9 @@ class CustomSearch extends SearchDelegate {
   @override
   Widget? buildLeading(BuildContext context) {
     return IconButton(
-        constraints: BoxConstraints.loose(Size.zero),
+        // constraints: BoxConstraints.loose(Size.zero),
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.pop(context,HomePage.routeName);
         },
         icon: Icon(
           Icons.arrow_back_ios_rounded,
@@ -68,6 +78,21 @@ class CustomSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+
+    @override
+    ThemeData appBarTheme(BuildContext context) {
+      searchFieldDecorationTheme;
+      return ThemeData(
+        scaffoldBackgroundColor: Theming.form,
+        backgroundColor: Theming.form,
+        appBarTheme: AppBarTheme(
+            toolbarHeight: MediaQuery
+                .sizeOf(context)
+                .height * 0.2,
+            elevation: 0,
+            color: Theming.form),
+      );
+    }
 
     if (query.isNotEmpty) {
       return SearchResults(query: query);

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/firebase_utils/FirebaseUtils.dart';
 import 'package:final_project/home_page/recipe_info.dart';
 import 'package:final_project/home_page/recipe_image.dart';
-import 'package:final_project/model/RandomRecipeResponse.dart';
+import 'package:final_project/home_page/save_item.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,21 +30,30 @@ class _FavoritePageState extends State<FavoritePage> {
          child: Column(
            children: [
              SafeArea(child: Text("Your Favorite Recipe!",style: Theme.of(context).textTheme.titleLarge,)),
-             Expanded(
-               child: ListView.separated(
-                  separatorBuilder: (context,index)=> const Divider(thickness: 3,),
-                    itemCount: provider.recipes.length,
-                    itemBuilder: (context, index) {
-                      return Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            RecipeImage(recipe: provider.recipes[index],dim: "312x231"),
-                            const SizedBox(width: 20),
-                            RecipeInfo(recipe: provider.recipes[index]),
-                          ],
-                        );
-                    }),
-             ),
+               Expanded(
+                 child: ListView.separated(
+                    separatorBuilder: (context,index)=> const Divider(thickness: 3,),
+                      itemCount: provider.recipes.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Stack(
+                                alignment: Alignment.topRight,
+                                children: [
+                                  RecipeImage(id: provider.recipes[index].id,dim: "312x231"),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: saveItem(recipe: provider.recipes[index]),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(width: 20),
+                              RecipeInfo(recipe: provider.recipes[index]),
+                            ],
+                          );
+                      }),
+               ),
            ],
          ),
        );

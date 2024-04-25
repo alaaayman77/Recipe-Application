@@ -14,34 +14,31 @@ class RecipeImage extends StatelessWidget {
   // 556x370
   // 636x393
   String? dim;
-  Recipes? recipe;
-   RecipeImage({super.key,required this.recipe,required this.dim});
+  int? id;
+   RecipeImage({super.key,required this.id,required this.dim});
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      height: MediaQuery.sizeOf(context).height * 0.15,
-      width: MediaQuery.sizeOf(context).width * 0.48,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10.0),
-        child: Stack(
-          alignment: Alignment.topRight,
-          children: [
-            CachedNetworkImage(
-                imageUrl:
-                "https://spoonacular.com/recipeImages/${recipe?.id}-$dim.jpg",
-                placeholder: (context, url) =>
-                const ImageLoading(),
-                errorWidget: (context, url, error) =>
-                const Icon(Icons.error),
-              ),
-            Padding(
-              padding:  EdgeInsets.all(8.0),
-              child: saveItem(recipe:recipe),
+    return  ClipRRect(
+      // clipBehavior: Clip.antiAlias,
+      borderRadius: BorderRadius.circular(20.0),
+      child:
+        // Stack(
+        // alignment: Alignment.topRight,
+        // children: [
+          CachedNetworkImage(
+            height: MediaQuery.sizeOf(context).height * 0.15,
+        width: MediaQuery.sizeOf(context).width * 0.48,
+
+        imageUrl:
+              "https://spoonacular.com/recipeImages/$id-$dim.jpg",
+              placeholder: (context, url) =>
+              const ImageLoading(),
+              errorWidget: (context, url, error) =>
+              const Icon(Icons.error),
             ),
-          ],
-        ),
-      ),
+        // ],
+      // ),
     );
   }
 }

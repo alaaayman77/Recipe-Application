@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:final_project/Api/api_manager.dart';
+import 'package:final_project/home_page/recipe_image.dart';
 import 'package:final_project/loading_effect/similar_loading.dart';
 import 'package:final_project/model/SimilarRecipeResponse.dart';
 import 'package:final_project/recipe_description/recipe_details.dart';
@@ -100,18 +101,19 @@ class _SimilarRecipeState extends State<SimilarRecipe> {
                           width: MediaQuery.of(context).size.width*0.5,
                           child: Column(
                             children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                  "https://spoonacular.com/recipeImages/${similarRecipes[index]?.id}-636x393.jpg",
-                                 fit: BoxFit.fill,
-                                  placeholder: (context, url) =>
-                                  const ImageLoading(),
-                                  errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                                ),
-                              ),
+                              RecipeImage(id: similarRecipes[index].id, dim: "636x393"),
+                              // ClipRRect(
+                              //   borderRadius: BorderRadius.circular(20),
+                              //   child: CachedNetworkImage(
+                              //     imageUrl:
+                              //     "https://spoonacular.com/recipeImages/${similarRecipes[index]?.id}-636x393.jpg",
+                              //    fit: BoxFit.fill,
+                              //     placeholder: (context, url) =>
+                              //     const ImageLoading(),
+                              //     errorWidget: (context, url, error) =>
+                              //     const Icon(Icons.error),
+                              //   ),
+                              // ),
                             Text('${similarRecipes[index].name}' ,
                               softWrap: false,
                               maxLines: 2,

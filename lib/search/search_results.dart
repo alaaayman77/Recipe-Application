@@ -28,18 +28,20 @@ class _SearchResultsState extends State<SearchResults> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return ListView.separated(
-
               separatorBuilder: (context, index) => Divider(thickness: 5),
               shrinkWrap: true,
               itemCount: 10,
-              itemBuilder: (context, index) => HomeLoading(),
+              itemBuilder: (context, index) => const Padding(
+                padding:  EdgeInsets.all(10.0),
+                child: HomeLoading(),
+              ),
             );
 
             //   I have error
           } else if (snapshot.hasError) {
             return Center(
               child: ErrorItem(
-                errormessage: "something want wrong",
+                errormessage: "something went wrong",
                 error: () {
                   ApiManager.getSearchRecipe();
                   setState(() {});
@@ -62,76 +64,81 @@ class _SearchResultsState extends State<SearchResults> {
           }
           var recipes = snapshot.data?.results;
 
-          return ListView.separated(
-              separatorBuilder: (context, index) => Divider(thickness: 5),
-              itemCount: recipes!.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: ()async{
-                    var recipeDetails = await ApiManager.getRandomRecipe();
-                    var item = recipeDetails!.recipes?[index];
-                    var mappedList =recipes.map((result) => Recipes(
-                        id: result.id,
-                        title: result.title,
-                        image:result.image,
-                        readyInMinutes: item?.readyInMinutes,
-                        servings: item?.servings,
-                        pricePerServing: item?.pricePerServing,
-                        extendedIngredients: item?.extendedIngredients,
-                        analyzedInstructions: item?.analyzedInstructions,
-                        summary: item?.summary,
-                        dishTypes: item?.dishTypes
-                    )).toList();
-                    Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments :mappedList[index]);
-                  } ,
-                  child: Row(
-                    children: [
-                      // Spacer(),
-                      Stack(
-                        alignment: Alignment.topRight,
-                        children: [
-                          Container(
-                            child: CachedNetworkImage(
-                              imageUrl:
-                                  "https://spoonacular.com/recipeImages/${recipes[index].id}-636x393.jpg",
-                              height: MediaQuery.sizeOf(context).height * 0.17,
-                              width: MediaQuery.sizeOf(context).width * 0.48,
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => ImageLoading(),
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
-                            ),
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)),
-                            height: MediaQuery.sizeOf(context).height * 0.17,
-                            width: MediaQuery.sizeOf(context).width * 0.48,
-                          ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(8.0),
-                          //   child:saveItem(recipe:recipes[index]),
-                          // ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: SizedBox(
-                          width: 100,
-                          height: 60,
-                          child: Text(
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView.separated(
+                separatorBuilder: (context, index) => Divider(thickness: 5),
+                itemCount: recipes!.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: ()async{
+                      var recipeDetails = await ApiManager.getRandomRecipe();
+                      var item = recipeDetails!.recipes?[index];
+                      var mappedList =recipes.map((result) => Recipes(
+                          id: result.id,
+                          title: result.title,
+                          image:result.image,
+                          readyInMinutes: item?.readyInMinutes,
+                          servings: item?.servings,
+                          pricePerServing: item?.pricePerServing,
+                          extendedIngredients: item?.extendedIngredients,
+                          analyzedInstructions: item?.analyzedInstructions,
+                          summary: item?.summary,
+                          dishTypes: item?.dishTypes
+                      )).toList();
+                      Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments :mappedList[index]);
+                    } ,
+                    child: Row(
+                      children: [
+                        // Spacer(),
+                        Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            RecipeImage(id:  recipes[index].id, dim:'636x393' ),
+                            // Container(
+                            //   child:
+                            //   CachedNetworkImage(
+                            //     imageUrl:
+                            //         "https://spoonacular.com/recipeImages/${recipes[index].id}-636x393.jpg",
+                            //     height: MediaQuery.sizeOf(context).height * 0.17,
+                            //     width: MediaQuery.sizeOf(context).width * 0.48,
+                            //     fit: BoxFit.cover,
+                            //     placeholder: (context, url) => ImageLoading(),
+                            //     errorWidget: (context, url, error) =>
+                            //         Icon(Icons.error),
+                            //   ),
+                            //   clipBehavior: Clip.antiAlias,
+                            //   decoration: BoxDecoration(
+                            //       borderRadius: BorderRadius.circular(20)),
+                            //   height: MediaQuery.sizeOf(context).height * 0.17,
+                            //   width: MediaQuery.sizeOf(context).width * 0.48,
+                            // ),
+                            // Padding(
+                            //   padding: const EdgeInsets.all(8.0),
+                            //   child:saveItem(recipe:recipes[index]),
+                            // ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: SizedBox(
+                            width: 100,
+                            height: 60,
+                            child: Text(
 
-                            recipes[index].title ?? "",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(color: Theming.deepBlue),
+                              recipes[index].title ?? "",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(color: Theming.deepBlue),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              });
+                      ],
+                    ),
+                  );
+                }),
+          );
         });
   }
 }
