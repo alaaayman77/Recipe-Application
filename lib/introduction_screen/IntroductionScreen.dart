@@ -1,3 +1,4 @@
+import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/introduction_screen/into_page.dart';
 import 'package:final_project/theming.dart';
@@ -60,7 +61,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
                       lastPage?
                       TextButton(onPressed: (){
-                        Navigator.pushReplacementNamed(context, Transition.routeName);
+                        Navigator.pushReplacementNamed(context, SignIn.routeName);
                       }, child: Text("Done",style:Theme.of(context).textTheme.titleSmall,))
                       :TextButton(onPressed: (){
                         controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeIn);
