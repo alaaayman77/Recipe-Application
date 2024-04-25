@@ -1,6 +1,5 @@
+import 'package:final_project/Register/CustomTextField.dart';
 import 'package:flutter/material.dart';
-
-import '../sign_in/CustomTextField.dart';
 
 
 class SignUp extends StatefulWidget {
@@ -138,7 +137,7 @@ class _SignupScreenState extends State<SignUp> {
                   Container(
                     child: CustomTextField(
                       controller: _confirmPasswordController,
-                      prefixIcon: Icons.lock,
+                      // prefixIcon: Icons.lock,
                         label: 'Confirm Password',
                       obscureText: true,
                       validator: (value) {

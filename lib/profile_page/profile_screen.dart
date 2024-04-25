@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'edit.dart';
 
 
@@ -44,55 +45,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(50),
-        child: Column(
+        child: ListView(
           children: [
-            const SizedBox(height: 20),
-            ImageProfile(),
-            //const SizedBox(height: 20),
+            Column(
+              children: [
+                const SizedBox(height: 20),
+                ImageProfile(),
+                //const SizedBox(height: 20),
 
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text(widget.name),
+                ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text(widget.name),
+                ),
+
+                const SizedBox(height: 10),
+
+                ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text(widget.email),
+                ),
+
+                const SizedBox(height: 10),
+
+                ListTile(
+                  leading: Icon(Icons.lock),
+                  title: Text(widget.pass),
+                ),
+
+                const SizedBox(height: 10),
+
+                ListTile(
+                  leading: Icon(Icons.phone),
+                  title: Text(widget.phone),
+                ),
+
+
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => EditProfile()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(15),
+                          backgroundColor: Color(0xFFC8E6C9)
+                      ),
+                      child: const Text('Edit Profile',style: TextStyle(color: Colors.black),)),
+                )
+              ],
             ),
-
-            const SizedBox(height: 10),
-
-            ListTile(
-              leading: Icon(Icons.email),
-              title: Text(widget.email),
-            ),
-
-            const SizedBox(height: 10),
-
-            ListTile(
-              leading: Icon(Icons.lock),
-              title: Text(widget.pass),
-            ),
-
-            const SizedBox(height: 10),
-
-            ListTile(
-              leading: Icon(Icons.phone),
-              title: Text(widget.phone),
-            ),
-
-
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => EditProfile()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(15),
-                      backgroundColor: Color(0xFFC8E6C9)
-                  ),
-                  child: const Text('Edit Profile',style: TextStyle(color: Colors.black),)),
-            )
           ],
         ),
       ),

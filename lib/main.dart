@@ -1,13 +1,14 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project/Register/sign_in/sign_in.dart';
+import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/favorite_page/favorite_page.dart';
 import 'package:final_project/home_page/home_page.dart';
+import 'package:final_project/introduction_screen/IntroductionScreen.dart';
 import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:final_project/recipe_description/recipe_details.dart';
 import 'package:final_project/settings_page/settings_page.dart';
-import 'package:final_project/sign_in/sign_in.dart';
-import 'package:final_project/sign_up/sign_up.dart';
 import 'package:final_project/theming.dart';
 import 'package:final_project/transition/transition.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,10 +40,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const Transition(),
+        home: const IntroductionScreen(),
         routes: {
-          SignIn.routeName: (context) => const SignIn(),
-          SignUp.routeName: (context) => const SignUp(),
+          SignIn.routeName: (context) =>  SignIn(),
+          SignUp.routeName: (context) =>  SignUp(),
           Transition.routeName: (context) => const Transition(),
           FavoritePage.routeName: (context) =>  FavoritePage(),
           ProfilePage.routeName: (context) => const ProfilePage(),
