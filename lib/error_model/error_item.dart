@@ -16,7 +16,7 @@ class _ErrorItemState extends State<ErrorItem> {
     return
          Container(
           width: 250,
-          height: 250,
+          height: 270,
           decoration: BoxDecoration(
               color: const Color.fromRGBO(255, 0, 0, 0.2),
               borderRadius: BorderRadius.circular(10),
@@ -40,20 +40,21 @@ class _ErrorItemState extends State<ErrorItem> {
                 const SizedBox(height: 10.0),
                 const Text(
                   'Error Occurred!',
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color: Colors.black),
                 ),
                 const SizedBox(height: 10.0),
                 Text(
                   widget.errormessage ?? "",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0,color: Colors.black),
+
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: Colors.white70,
                     ),
                     onPressed: widget.error,
                     child: const Text(
