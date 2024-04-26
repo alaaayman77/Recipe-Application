@@ -13,8 +13,9 @@ import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/search/custom_search.dart';
 import 'package:final_project/theming.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
 import '../recipe_description/recipe_details.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,9 +52,8 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SafeArea(
-            // maintainBottomViewPadding: false,
             child: Container(
-              height: MediaQuery.sizeOf(context).height * 0.233 ,
+              height: MediaQuery.sizeOf(context).height * 0.20 ,
               color:Theming.white ,
               child:Column(
                 children: [
@@ -68,25 +68,33 @@ class _HomePageState extends State<HomePage> {
                               size:35
                           )),
                       Expanded(
-                        child: TextFormField(
-                          readOnly: true,
-                          onTap: (){
-                            showSearch(context: context, delegate:CustomSearch());
-                            setState(() {
+                          child: SizedBox(
+                            height: 50,
+                            width: 60,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: TextFormField(
+                                readOnly: true,
+                                onTap: (){
+                                  showSearch(context: context, delegate:CustomSearch());
+                                  setState(() {
 
-                            });
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none),
-                              hintText: "Search",
-                              hintStyle:TextStyle(color: Theming.secondaryText,fontSize:20) ,
-                              prefixIcon: Icon(Icons.search,size:30,color:Theming.secondaryText),
-                              filled: true,
-                              fillColor: Theming.form,
-                              enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none)
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none),
+                                    hintText: "Search",
+                                    hintStyle:TextStyle(color: Theming.secondaryText,fontSize:20,),
+                                    prefixIcon: Icon(Icons.search,size:30,color:Theming.secondaryText),
+                                    filled: true,
+                                    fillColor: Theming.form,
+                                    enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(25),borderSide: BorderSide.none)
+                                ),
+
+                              ),
+                            ),
                           ),
 
-                        ),
 
                       ),
                     ],
@@ -121,6 +129,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
           ),
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text("Popular Recipes",style: Theme.of(context).textTheme.titleLarge,),
@@ -136,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 10,
-                        itemBuilder: (context, index) =>  HomeLoading(),
+                        itemBuilder: (context, index) => const HomeLoading(),
                         gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing:10,
@@ -158,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                     // Error from API
                     if (snapshot.data?.status == 'failure') {
                       return Center(
-                        child:  ErrorItem(errormessage:snapshot.data?. message,error: (){
+                        child:  ErrorItem(errormessage:snapshot.data?.message,error: (){
                           ApiManager.getRandomRecipe();
                           setState(() {
                           });
@@ -166,11 +175,11 @@ class _HomePageState extends State<HomePage> {
                       );
 
                     }
-                    var recipes = snapshot.data!.recipes;
+                    var recipes = snapshot.data?.recipes;
 
                     return
                       GridView.builder(
-                          itemCount: recipes!.length,
+                          itemCount: recipes?.length,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 15,
@@ -180,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                             return GestureDetector(
                               onTap: (){
 
-                                Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments : recipes[index]);
+                                Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments : recipes?[index]);
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,14 +197,26 @@ class _HomePageState extends State<HomePage> {
                                   Stack(
                                     alignment: Alignment.topRight,
                                     children: [
-                                      RecipeImage(id: recipes[index].id,dim: "636x393"),
+                                      RecipeImage(id: recipes?[index].id,dim: "636x393"),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: saveItem(recipe:recipes[index]),
+                                        child: saveItem(recipe:recipes?[index]),
                                       ),
                                     ],
                                   ),
-                                  RecipeInfo(recipe: recipes[index]),
+                                     Text(
+                                      softWrap: false,
+                                      recipes?[index].title ?? "",
+                                      style: Theme.of(context).textTheme.titleSmall,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      "Ready in ${recipes?[index].readyInMinutes} mins",
+                                      style: Theme.of(context).textTheme.bodySmall,
+                                    ),
+                                  ),
                                 ],
                               ),
                             );
