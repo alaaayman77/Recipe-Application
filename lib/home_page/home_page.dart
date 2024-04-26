@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           SafeArea(
             // maintainBottomViewPadding: false,
             child: Container(
-              height: MediaQuery.sizeOf(context).height * 0.20 ,
+              height: MediaQuery.sizeOf(context).height * 0.233 ,
               color:Theming.white ,
               child:Column(
                 children: [
@@ -121,7 +121,6 @@ class _HomePageState extends State<HomePage> {
             ),
 
           ),
-
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text("Popular Recipes",style: Theme.of(context).textTheme.titleLarge,),
@@ -137,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 10,
-                        itemBuilder: (context, index) => const HomeLoading(),
+                        itemBuilder: (context, index) =>  HomeLoading(),
                         gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing:10,
@@ -159,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                     // Error from API
                     if (snapshot.data?.status == 'failure') {
                       return Center(
-                        child:  ErrorItem(errormessage:snapshot.data?.message,error: (){
+                        child:  ErrorItem(errormessage:snapshot.data?. message,error: (){
                           ApiManager.getRandomRecipe();
                           setState(() {
                           });
@@ -167,11 +166,11 @@ class _HomePageState extends State<HomePage> {
                       );
 
                     }
-                    var recipes = snapshot.data?.recipes;
+                    var recipes = snapshot.data!.recipes;
 
                     return
                       GridView.builder(
-                          itemCount: recipes?.length,
+                          itemCount: recipes!.length,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 15,
@@ -181,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                             return GestureDetector(
                               onTap: (){
 
-                                Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments : recipes?[index]);
+                                Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments : recipes[index]);
                               },
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,14 +188,14 @@ class _HomePageState extends State<HomePage> {
                                   Stack(
                                     alignment: Alignment.topRight,
                                     children: [
-                                      RecipeImage(id: recipes?[index].id,dim: "636x393"),
+                                      RecipeImage(id: recipes[index].id,dim: "636x393"),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: saveItem(recipe:recipes?[index]),
+                                        child: saveItem(recipe:recipes[index]),
                                       ),
                                     ],
                                   ),
-                                  RecipeInfo(recipe: recipes?[index]),
+                                  RecipeInfo(recipe: recipes[index]),
                                 ],
                               ),
                             );
