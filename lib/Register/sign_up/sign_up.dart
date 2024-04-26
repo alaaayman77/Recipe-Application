@@ -97,10 +97,6 @@ class _SignupScreenState extends State<SignUp> {
                       SizedBox(height: 20.0),
 
                       Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: Colors.grey[200],
-                        ),
                         child: CustomTextField(
                           controller: _usernameController,
                             label: 'Username',
