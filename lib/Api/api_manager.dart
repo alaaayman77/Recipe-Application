@@ -20,7 +20,7 @@ class ApiManager{
          //  "apiKey": "73f34b466856436e978b5cc90412f0d0",
        // "apiKey":"73f34b466856436e978b5cc90412f0d0",
        //   "apiKey":"9d23519846b7487ebb193fcb64c83c74",
-          "number":"100",
+          "number":"20",
           "tags":tags ,
         });
 
