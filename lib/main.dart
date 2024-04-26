@@ -8,6 +8,7 @@ import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:final_project/recipe_description/recipe_details.dart';
 import 'package:final_project/settings_page/settings_page.dart';
+import 'package:final_project/splashscreen/splashscreen.dart';
 import 'package:final_project/theming.dart';
 import 'package:final_project/transition/transition.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,8 +40,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Transition(),
+       initialRoute: SplashScreen.routeName,
         routes: {
+          SplashScreen.routeName:(context) =>SplashScreen(),
           SignIn.routeName: (context) =>  SignIn(),
           SignUp.routeName: (context) =>  SignUp(),
           Transition.routeName: (context) => const Transition(),
