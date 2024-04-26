@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
