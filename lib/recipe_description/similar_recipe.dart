@@ -69,7 +69,7 @@ class _SimilarRecipeState extends State<SimilarRecipe> {
                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                  height:MediaQuery.of(context).size.height*0.23,
+                  height:MediaQuery.of(context).size.height*0.26,
                     width:MediaQuery.of(context).size.width,
                   child:ListView.builder(
                     itemCount:similarRecipes!.length,
@@ -95,31 +95,35 @@ class _SimilarRecipeState extends State<SimilarRecipe> {
                           )).toList();
                           Navigator.of(context).pushNamed(RecipeDetails.routeName ,arguments :mappedList[index]);
                         },
-                        child: Container(
+                        child:
+                           Container(
+                          
+                            height:MediaQuery.of(context).size.height*0.5,
+                            width: MediaQuery.of(context).size.width*0.5,
+                            child: Column(
+                              children: [
+                                RecipeImage(id: similarRecipes[index].id, dim: "636x393"),
+                                // ClipRRect(
+                                //   borderRadius: BorderRadius.circular(20),
+                                //   child: CachedNetworkImage(
+                                //     imageUrl:
+                                //     "https://spoonacular.com/recipeImages/${similarRecipes[index]?.id}-636x393.jpg",
+                                //    fit: BoxFit.fill,
+                                //     placeholder: (context, url) =>
+                                //     const ImageLoading(),
+                                //     errorWidget: (context, url, error) =>
+                                //     const Icon(Icons.error),
+                                //   ),
+                                // ),
+                              Expanded(
+                                child: Text('${similarRecipes[index].name}' ,
+                                  softWrap: false,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,),
+                              )
+                            ],
+                            ),
 
-                          height:MediaQuery.of(context).size.height*0.5,
-                          width: MediaQuery.of(context).size.width*0.5,
-                          child: Column(
-                            children: [
-                              RecipeImage(id: similarRecipes[index].id, dim: "636x393"),
-                              // ClipRRect(
-                              //   borderRadius: BorderRadius.circular(20),
-                              //   child: CachedNetworkImage(
-                              //     imageUrl:
-                              //     "https://spoonacular.com/recipeImages/${similarRecipes[index]?.id}-636x393.jpg",
-                              //    fit: BoxFit.fill,
-                              //     placeholder: (context, url) =>
-                              //     const ImageLoading(),
-                              //     errorWidget: (context, url, error) =>
-                              //     const Icon(Icons.error),
-                              //   ),
-                              // ),
-                            Text('${similarRecipes[index].name}' ,
-                              softWrap: false,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,)
-                          ],
-                          ),
                         ),
                       ),
                     ),) ,

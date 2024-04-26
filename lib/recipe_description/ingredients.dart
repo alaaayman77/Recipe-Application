@@ -33,7 +33,7 @@ class Ingredient extends StatelessWidget{
                         color: Colors.green,
                       ),
                       SizedBox(width: 4),
-                      Expanded(child: Text('${listItem.amount} ${listItem.unit} ${listItem.image} ${listItem.name}' ,  style: Theme.of(context).textTheme.bodyMedium , softWrap : true)),
+                      Expanded(child: Text('${listItem.amount} ${listItem.unit} ${listItem.name}' ,  style: Theme.of(context).textTheme.bodyMedium , softWrap : true)),
                     ],
                   ),
                 );
