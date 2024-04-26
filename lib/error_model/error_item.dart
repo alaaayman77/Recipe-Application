@@ -53,7 +53,7 @@ class _ErrorItemState extends State<ErrorItem> {
                 ),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white70,
+                      backgroundColor: Colors.white,
                     ),
                     onPressed: widget.error,
                     child: const Text(
