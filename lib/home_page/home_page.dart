@@ -7,16 +7,13 @@ import 'package:final_project/loading_effect/homeLoading.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/search/custom_search.dart';
 import 'package:final_project/theming.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../recipe_description/recipe_details.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = "HomePage";
 
   const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }

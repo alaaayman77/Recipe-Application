@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
           () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) =>Transition(),
+          builder: (context) =>IntroductionScreen(),
         ),
       ),
     );
@@ -34,9 +34,9 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/icons/applogo.png',
-
-
+              'assets/icons/logo.png',
+              height: 300,
+              width: 300,
             ),
             SizedBox(height: 20),
 
