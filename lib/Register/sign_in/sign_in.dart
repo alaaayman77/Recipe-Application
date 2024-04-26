@@ -1,3 +1,4 @@
+import 'package:final_project/Register/CustomTextField.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/transition/transition.dart';
@@ -56,20 +57,10 @@ class LoginScreenState extends State<SignIn> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.grey[200],
-                                ),
-
-                                child: TextFormField(
+                                child: CustomTextField(
                                   controller: emailController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Email',
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-                                    border: InputBorder.none,
-                                    prefixIcon: Icon(Icons.email),
-                                  ),
-                                  keyboardType: TextInputType.emailAddress,
+                                    label: 'Email',
+                                    prefixIcon: Icons.email,
                                   validator: (value){
                                     if (value == null || value.isEmpty){
                                       return 'Please enter your email';
@@ -87,18 +78,10 @@ class LoginScreenState extends State<SignIn> {
                             SizedBox(height: 20,),
 
                             Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.grey[200],
-                              ),
-                              child: TextFormField(
+                              child: CustomTextField(
                                 controller: passwordController,
-                                decoration: InputDecoration(
-                                  labelText: 'Password',
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(Icons.lock),
-                                ),
+                                  label: 'Password',
+                                  prefixIcon: Icons.lock,
                                 obscureText : true,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
