@@ -1,18 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/Api/api_manager.dart';
 import 'package:final_project/error_model/error_item.dart';
-import 'package:final_project/firebase_utils/FirebaseUtils.dart';
 import 'package:final_project/home_page/custom_tab.dart';
-import 'package:final_project/home_page/recipe_info.dart';
 import 'package:final_project/home_page/recipe_image.dart';
 import 'package:final_project/home_page/save_item.dart';
 import 'package:final_project/loading_effect/homeLoading.dart';
-import 'package:final_project/loading_effect/image_loading.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/search/custom_search.dart';
 import 'package:final_project/theming.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -53,7 +47,6 @@ class _HomePageState extends State<HomePage> {
         children: [
           SafeArea(
             child: Container(
-              height: MediaQuery.sizeOf(context).height * 0.20 ,
               color:Theming.white ,
               child:Column(
                 children: [
