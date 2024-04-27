@@ -7,6 +7,8 @@ import 'package:final_project/provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../recipe_description/recipe_details.dart';
+
 class FavoritePage extends StatefulWidget {
     static const routeName = "FavoritePage";
 
@@ -35,23 +37,28 @@ class _FavoritePageState extends State<FavoritePage> {
                     separatorBuilder: (context,index)=> const Divider(thickness: 3,),
                       itemCount: provider.recipes.length,
                       itemBuilder: (context, index) {
-                        return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Stack(
-                                alignment: Alignment.topRight,
-                                children: [
-                                  RecipeImage(id: provider.recipes[index].id,dim: "312x231"),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: saveItem(recipe: provider.recipes[index]),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(width: 20),
-                              RecipeInfo(recipe: provider.recipes[index]),
-                            ],
-                          );
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.of(context).pushNamed(RecipeDetails.routeName , arguments: provider.recipes[index]);
+                          },
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Stack(
+                                  alignment: Alignment.topRight,
+                                  children: [
+                                    RecipeImage(id: provider.recipes[index].id,dim: "312x231"),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: saveItem(recipe: provider.recipes[index]),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(width: 20),
+                                RecipeInfo(recipe: provider.recipes[index]),
+                              ],
+                            ),
+                        );
                       }),
                ),
            ],
