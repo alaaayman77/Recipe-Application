@@ -41,7 +41,7 @@ class _SignupScreenState extends State<SignUp> {
       print('Password: $password');
     }
   }
-
+  bool hidden = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,6 +118,19 @@ class _SignupScreenState extends State<SignUp> {
                       Container(
                         child: CustomTextField(
                           controller: _passwordController,
+                          hidden: hidden,
+                          iconButton: IconButton(
+                              icon: Icon(hidden == true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              onPressed: () {
+                                if (hidden == true) {
+                                  hidden = false;
+                                } else {
+                                  hidden = true;
+                                }
+                                setState(() {});
+                              }),
                             label: 'Password',
                             prefixIcon: Icons.lock,
                           obscureText: true,
@@ -136,7 +149,20 @@ class _SignupScreenState extends State<SignUp> {
                       Container(
                         child: CustomTextField(
                           controller: _confirmPasswordController,
-                          // prefixIcon: Icons.lock,
+                          hidden: hidden,
+                          iconButton: IconButton(
+                              icon: Icon(hidden == true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              onPressed: () {
+                                if (hidden == true) {
+                                  hidden = false;
+                                } else {
+                                  hidden = true;
+                                }
+                                setState(() {});
+                              }),
+
                             label: 'Confirm Password',
                           obscureText: true,
                           validator: (value) {

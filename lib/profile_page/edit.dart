@@ -30,7 +30,7 @@ class _EditProfileState extends State<EditProfile> {
     super.dispose();
   }
 
-  late var arguments;
+  var arguments;
   void _submitForm() {
 
     if (_formKey.currentState!.validate()) {
@@ -63,15 +63,13 @@ class _EditProfileState extends State<EditProfile> {
 
     ToastContext().init(context);
 
-
+   if(arguments==null){
      arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-
-
-    print(arguments['name']);
-    _usernameController.text = arguments['name'];
-    _passwordController.text = arguments['pass'];
-    _phoneController.text= arguments["phone"];
-    _emailController.text= arguments['email'];
+     _usernameController.text = arguments['name'];
+     _passwordController.text = arguments['pass'];
+     _phoneController.text= arguments["phone"];
+     _emailController.text= arguments['email'];
+   }
 
     return Scaffold(
       appBar: AppBar(
@@ -101,6 +99,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     child: TextFormField(
                       controller: _usernameController,
+
                       decoration: InputDecoration(
                         labelText: 'Name',
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),

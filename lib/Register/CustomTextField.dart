@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? label;
   final IconData? prefixIcon;
   final bool obscureText;
   final String? Function(String?)? validator;
-
-   const CustomTextField({
+  bool? hidden;
+  IconData? hiddenIcon;
+  Widget? iconButton;
+    CustomTextField({
     Key? key,
+     this.hidden,
+     this.iconButton,
+     this.hiddenIcon,
     required this.controller,
       this.label,
       this.prefixIcon,
@@ -17,6 +22,11 @@ class CustomTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
@@ -24,15 +34,17 @@ class CustomTextField extends StatelessWidget {
         color: Colors.grey[200],
       ),
       child: TextFormField(
-        controller: controller,
+
+        controller: widget.controller,
         decoration: InputDecoration(
-          labelText: label,
+          suffixIcon:widget.iconButton ,
+          labelText: widget.label,
           contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
           border: InputBorder.none,
-          prefixIcon: Icon(prefixIcon),
+          prefixIcon: Icon(widget.prefixIcon),
         ),
-        obscureText: obscureText,
-        validator: validator,
+        obscureText:widget.hidden ?? false,
+        validator: widget.validator,
       ),
     );
   }

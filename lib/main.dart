@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-       initialRoute: Transition.routeName,
+       initialRoute: SignIn.routeName,
         routes: {
           SplashScreen.routeName:(context) =>SplashScreen(),
           SignIn.routeName: (context) =>  SignIn(),

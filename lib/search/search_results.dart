@@ -125,7 +125,7 @@ class _SearchResultsState extends State<SearchResults> {
                             width: 100,
                             height: 60,
                             child: Text(
-
+                              overflow:TextOverflow.clip,
                               recipes[index].title ?? "",
                               style: Theme.of(context)
                                   .textTheme

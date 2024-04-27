@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 
 class SignIn extends StatefulWidget {
+
   static const String routeName = "SignIn";
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -35,7 +36,7 @@ class LoginScreenState extends State<SignIn> {
       print('Password: $password');
     }
   }
-
+  bool hidden = true;
   @override
   Widget build (BuildContext context){
 //wrong place
@@ -79,6 +80,19 @@ class LoginScreenState extends State<SignIn> {
 
                             Container(
                               child: CustomTextField(
+                                hidden: hidden,
+                                iconButton: IconButton(
+                                    icon: Icon(hidden == true
+                                        ? Icons.visibility_off
+                                        : Icons.visibility),
+                                    onPressed: () {
+                                      if (hidden == true) {
+                                        hidden = false;
+                                      } else {
+                                        hidden = true;
+                                      }
+                                      setState(() {});
+                                    }),
                                 controller: passwordController,
                                   label: 'Password',
                                   prefixIcon: Icons.lock,
@@ -95,21 +109,21 @@ class LoginScreenState extends State<SignIn> {
                             SizedBox(height: 5.0,),
 
 
-                            Container(
-                              child: CheckboxListTile(
-                                title: Text('Remember me', style: TextStyle(color: Colors.grey),),
-                                checkColor: Colors.black,
-                                activeColor: Colors.white,
-                                value: isChecked,
-                                onChanged: ( value) {
-                                  setState(() {
-                                    isChecked =   !isChecked; //error fixed :)
-                                    print('checked');
-                                  });
-                                },
-                                controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
-                              ),
-                            ),
+                            // Container(
+                            //   child: CheckboxListTile(
+                            //     title: Text('Remember me', style: TextStyle(color: Colors.grey),),
+                            //     checkColor: Colors.black,
+                            //     activeColor: Colors.white,
+                            //     value: isChecked,
+                            //     onChanged: ( value) {
+                            //       setState(() {
+                            //         isChecked =   !isChecked; //error fixed :)
+                            //         print('checked');
+                            //       });
+                            //     },
+                            //     controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+                            //   ),
+                            // ),
                             SizedBox(height: 35.0,),
                             ElevatedButton(
                               onPressed: submitForm,
@@ -124,20 +138,20 @@ class LoginScreenState extends State<SignIn> {
                             ),
                             SizedBox(height: 3.0,),
 
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              child: TextButton(
-                                onPressed: () {
-                                },
-                                child: Text(
-                                  'Forgot Password?',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Container(
+                            //   padding: EdgeInsets.all(10.0),
+                            //   child: TextButton(
+                            //     onPressed: () {
+                            //     },
+                            //     child: Text(
+                            //       'Forgot Password?',
+                            //       style: TextStyle(
+                            //         color: Colors.blue,
+                            //         fontWeight: FontWeight.bold,
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
 
                             Container(
                               padding: EdgeInsets.all(10.0),

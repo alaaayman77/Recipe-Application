@@ -37,12 +37,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         //   onPressed: () {},
         // ),
         actions: [
-          IconButton(
-              icon: Icon(
-                Icons.share, color: Colors.black,
-              ),
-              onPressed: () {}
-          )
+          // IconButton(
+          //     icon: Icon(
+          //       Icons.share, color: Colors.black,
+          //     ),
+          //     onPressed: () {}
+          // )
         ],
       ),
       body: Padding(

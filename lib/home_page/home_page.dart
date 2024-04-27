@@ -50,13 +50,13 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 10,),
                   Row(
                     children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                              Icons.person,
-                              color: Theming.secondaryText,
-                              size:35
-                          )),
+                      // IconButton(
+                      //     onPressed: () {},
+                      //     icon: Icon(
+                      //         Icons.person,
+                      //         color: Theming.secondaryText,
+                      //         size:35
+                      //     )),
                       Expanded(
                           child: SizedBox(
                             height: 50,
