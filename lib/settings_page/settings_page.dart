@@ -56,9 +56,12 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     ));
   }
+  Future<bool> _onWillPop() async {
+    return false;
+  }
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return PopScope(child:  Column(
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
@@ -78,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SizedBox(height: 20),
               SettingsContainer(title: 'Contact us', openBottomSheet: ContactUsBottomSheet),
               SizedBox(height: 20),
-              SettingsContainer(title: 'Theming', openBottomSheet: ThemingBottomSheet),
+
               Spacer(),
               InkWell(
                 onTap: () {
@@ -97,6 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           TextButton(
                             onPressed: () {
+                              Navigator.of(context).popUntil(ModalRoute.withName(SignUp.routeName));
                               Navigator.of(context).pushNamed(SignUp.routeName);
 
                             },
@@ -143,5 +147,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         )
       ],
-    );
+    ), );
+
   }}

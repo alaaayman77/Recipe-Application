@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                       //   I have error
                     } else if (snapshot.hasError) {
                       return Center(
-                        child: ErrorItem(errormessage: "something want wrong",error: (){
+                        child: ErrorItem(errormessage: "something went wrong",error: (){
                           ApiManager.getRandomRecipe();
                           setState(() {
                           });
