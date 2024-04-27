@@ -194,6 +194,8 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ],
                                   ),
+
+
                                      Text(
                                       softWrap: false,
                                       recipes?[index].title ?? "",

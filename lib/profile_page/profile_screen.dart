@@ -10,14 +10,16 @@ import 'edit.dart';
 
 class ProfileScreen extends StatefulWidget {
 
+  static const routeName ="ProfileScreen";
   ProfileScreen(
-      {Key? key, required this.name, required this.email, required this.pass, required this.phone,})
+      {Key? key, this.name="Ali",  this.email="Ali@gmail.com",  this.pass="1234567",  this.phone="11111111",required this.obsucre})
       : super(key: key);
 
-  String name;
-  String email;
-  String pass;
-  String phone;
+  String? name;
+  String? email;
+  String? pass;
+  String? phone;
+  bool obsucre;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -55,28 +57,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   leading: Icon(Icons.person),
-                  title: Text(widget.name),
+                  title: Text(widget.name??""),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
                   leading: Icon(Icons.email),
-                  title: Text(widget.email),
+                  title: Text(widget.email??""),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
                   leading: Icon(Icons.lock),
-                  title: Text(widget.pass),
+                  title: TextFormField(initialValue:widget.pass,
+                    style: TextStyle(color: Colors.black),
+                    obscureText: widget.obsucre,readOnly: true,
+                    decoration: InputDecoration(border: InputBorder.none,
+                  ),),
+                  trailing: IconButton(
+                      onPressed: (){
+                        widget.obsucre = !widget.obsucre;
+                        setState(() {
+                          print(widget.obsucre);
+                        });
+                      },
+                      icon:widget.obsucre? Icon(Icons.visibility_off):Icon(Icons.visibility),
+                      ),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
                   leading: Icon(Icons.phone),
-                  title: Text(widget.phone),
+                  title: Text(widget.phone??""),
                 ),
 
 
@@ -87,8 +102,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => EditProfile()));
+                        Navigator.pushNamed(context,EditProfile.routeName,
+                        arguments: {
+                          "name":widget.name,
+                          "email":widget.email,
+                          "pass":widget.pass,
+                          "phone":widget.phone,
+                          "obsucre":widget.obsucre,
+                        }
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(15),

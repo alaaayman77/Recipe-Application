@@ -1,12 +1,15 @@
-import 'package:final_project/profile_page/profile_page.dart';
-import 'package:final_project/profile_page/profile_screen.dart';
+import 'package:final_project/theming.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
+
 
 
 
 class EditProfile extends StatefulWidget{
   const EditProfile({super.key});
+  static const routeName = "EditProfile";
+
   @override
   _EditProfileState createState() => _EditProfileState();
 }
@@ -27,26 +30,49 @@ class _EditProfileState extends State<EditProfile> {
     super.dispose();
   }
 
+  late var arguments;
   void _submitForm() {
+
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text.trim();
       String password = _passwordController.text;
 
+      arguments["name"] = _usernameController.text;
+      arguments["email"] = _emailController.text;
+      arguments["pass"] = _passwordController.text;
+      arguments["phone"] = _phoneController.text;
+
+      Toast.show("Changes Saved", duration: Toast.lengthLong, gravity:Toast.bottom,backgroundColor: Theming.primary,);
+
       Navigator.pop(context);
+
 
       print('Email: $email');
       print('Password: $password');
     }
   }
 
-  var name;
-  var email;
-  var pass;
-  var phone;
+  // var email;
+  // var pass;
+  // var phone;
+
 
 
   @override
   Widget build(BuildContext context) {
+
+    ToastContext().init(context);
+
+
+     arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+
+
+    print(arguments['name']);
+    _usernameController.text = arguments['name'];
+    _passwordController.text = arguments['pass'];
+    _phoneController.text= arguments["phone"];
+    _emailController.text= arguments['email'];
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Profile"),
@@ -82,13 +108,13 @@ class _EditProfileState extends State<EditProfile> {
                         prefixIcon: Icon(Icons.person), // Icon for username field
                       ),
                       keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your username';
-                        }
-
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter your username';
+                      //   }
+                      //
+                      //   return null;
+                      // },
                     ),
                   ),
 
@@ -101,6 +127,7 @@ class _EditProfileState extends State<EditProfile> {
                     ),
                     child: TextFormField(
                       controller: _emailController,
+
                       decoration: InputDecoration(
                         labelText: 'Email',
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -111,17 +138,16 @@ class _EditProfileState extends State<EditProfile> {
 
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
+                        // if (value == null || value.isEmpty) {
+                        //   return 'Please enter your email';
+                        // }
                         final RegExp emailRegex = RegExp(
                           r'^[a-zA-Z0-9.]+@gmail\.com$',
                         );
-                        if (!emailRegex.hasMatch(value)) {
+                        if (!emailRegex.hasMatch(value!)) {
                           return 'Please enter a valid Gmail address';
                         }
                         print(_emailController.text);
-
                         return null;
                       },
 
@@ -147,9 +173,9 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                       obscureText: true,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a password';
-                        }
+                        // if (value == null || value.isEmpty) {
+                        //   return 'Please enter a password';
+                        // }
 
                         // You can add more sophisticated password validation here if needed
                         return null;
@@ -171,14 +197,14 @@ class _EditProfileState extends State<EditProfile> {
                         border: InputBorder.none,
                         prefixIcon: Icon(Icons.phone),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your phone';
-                        }
-
-                        // You can add more sophisticated username validation here if needed
-                        return null;
-                      },
+                      // validator: (value) {
+                      //   if (value == null || value.isEmpty) {
+                      //     return 'Please enter your phone';
+                      //   }
+                      //
+                      //   // You can add more sophisticated username validation here if needed
+                      //   return null;
+                      // },
                     ),
                   ),
                   SizedBox(height: 60.0),
@@ -189,12 +215,7 @@ class _EditProfileState extends State<EditProfile> {
                     children: [
                       OutlinedButton(
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => ProfileScreen(
-                                  name: _usernameController.text,
-                                  email: _emailController.text,
-                                  pass: _passwordController.text,
-                                  phone: _phoneController.text)));
+                         Navigator.pop(context);
                         },
                         child: Text("CANCEL",
                           style: TextStyle(
