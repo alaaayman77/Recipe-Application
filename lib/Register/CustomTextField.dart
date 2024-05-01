@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theming.dart';
+
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String? label;
@@ -34,11 +36,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         color: Colors.grey[200],
       ),
       child: TextFormField(
-
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theming.darkBlue) ,
         controller: widget.controller,
         decoration: InputDecoration(
           suffixIcon:widget.iconButton ,
           labelText: widget.label,
+          labelStyle: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theming.secondaryText),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
           border: InputBorder.none,
           prefixIcon: Icon(widget.prefixIcon),

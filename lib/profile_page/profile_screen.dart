@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import '../Register/sign_up/sign_up.dart';
+import '../theming.dart';
 import 'edit.dart';
 
 
@@ -31,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("Profile" , style: Theme.of(context).textTheme.titleLarge,),
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back, color: Colors.black),
         //   onPressed: () {},
@@ -56,23 +58,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //const SizedBox(height: 20),
 
                 ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text(widget.name??""),
+                  leading: Icon(Icons.person , color:Theming.primary,),
+                  title: Text('${globalUsername}', style: Theme.of(context).textTheme.titleMedium),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.email),
-                  title: Text(widget.email??""),
+                  leading: Icon(Icons.email , color:Theming.primary,),
+                  title: Text('${globalEmail}' ,style: Theme.of(context).textTheme.titleMedium),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.lock),
-                  title: TextFormField(initialValue:widget.pass,
-                    style: TextStyle(color: Colors.black),
+                  leading: Icon(Icons.lock , color:Theming.primary,),
+                  title: TextFormField(initialValue:'${globalPassword}',
+                       style: Theme.of(context).textTheme.titleMedium,
                     obscureText: widget.obsucre,readOnly: true,
                     decoration: InputDecoration(border: InputBorder.none,
                   ),),
@@ -90,8 +92,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 10),
 
                 ListTile(
-                  leading: Icon(Icons.phone),
-                  title: Text(widget.phone??""),
+                  leading: Icon(Icons.phone , color:Theming.primary,),
+                  title: Text('${globalPhone}', style: Theme.of(context).textTheme.titleMedium),
                 ),
 
 
@@ -101,22 +103,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context,EditProfile.routeName,
+                    onPressed: () async {
+                      final result = await Navigator.pushNamed(
+                        context,
+                        EditProfile.routeName,
                         arguments: {
-                          "name":widget.name,
-                          "email":widget.email,
-                          "pass":widget.pass,
-                          "phone":widget.phone,
-                          "obsucre":widget.obsucre,
-                        }
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.all(15),
-                          backgroundColor: Color(0xFFC8E6C9)
-                      ),
-                      child: const Text('Edit Profile',style: TextStyle(color: Colors.black),)),
+                          "name": '${globalUsername}',
+                          "email": '${globalEmail}',
+                          "password": '${globalPassword}',
+                          "phone": '${globalPhone}',
+                          "obsucre": widget.obsucre,
+                        },
+                      );
+
+                      // Update the profile screen if changes were made
+                      if (result != null && result is Map<String, dynamic>) {
+                        setState(() {
+                          globalUsername= result['name'];
+                          globalEmail = result['email'];
+                          globalPassword= result['password'];
+                          globalPhone = result['phone'];
+                        });
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(15),
+                      backgroundColor: Theming.primary,
+                    ),
+                    child:  Text(
+                      'Edit Profile',
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.white),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -154,8 +172,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   //border: Border.all(width: 3, color: Colors.white),
-                  color: Color(0xFFC8E6C9)),
-              child: Icon(Icons.edit),
+                  color:Theming.primary),
+              child: Icon(Icons.edit ,color: Theming.darkBlue, ),
             ),
           ),
         ),

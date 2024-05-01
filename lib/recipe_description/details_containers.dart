@@ -1,8 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 
+import '../provider/app_config_provider.dart';
 import '../theming.dart';
 
 class DetailsContainers extends StatelessWidget{
@@ -11,6 +13,7 @@ class DetailsContainers extends StatelessWidget{
   DetailsContainers({required this.title ,  this.desc});
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -20,7 +23,7 @@ class DetailsContainers extends StatelessWidget{
           desc??'',
           trimMode: TrimMode.Line,
           trimLines: 3,
-          colorClickableText: Theming.deepBlue,
+          colorClickableText:  provider.appTheme==ThemeMode.dark ? Theming.white: Theming.deepBlue,
           trimCollapsedText: 'Show more',
           trimExpandedText: 'Show less',
           style: Theme.of(context).textTheme.bodyMedium,

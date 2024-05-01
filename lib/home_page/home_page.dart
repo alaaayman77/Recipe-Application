@@ -8,6 +8,8 @@ import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/search/custom_search.dart';
 import 'package:final_project/theming.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/app_config_provider.dart';
 import '../recipe_description/recipe_details.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,14 +39,14 @@ class _HomePageState extends State<HomePage> {
   // bool isFavorite = false;
   @override
   Widget build(BuildContext context) {
-
+    var provider = Provider.of<AppConfigProvider>(context);
     return
       Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SafeArea(
             child: Container(
-              color:Theming.white ,
+              color:provider.appTheme==ThemeMode.dark ? Theming.darkBlue:Theming.white,
               child:Column(
                 children: [
                   const SizedBox(height: 10,),
