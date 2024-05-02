@@ -1,7 +1,9 @@
-//Class have all firebase functions
-import 'package:cloud_firestore/cloud_firestore.dart';
+ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
-import 'package:final_project/model/myUser.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+import '../Register/sign_in/sign_in.dart';
 
 class FirebaseUtils{
   // method to get recipe collection from firebase
@@ -31,6 +33,33 @@ class FirebaseUtils{
     var docRef = recipeCollection.doc(recipe.id.toString());
     return docRef.delete();
   }
+
+ static final FirebaseAuth _auth = FirebaseAuth.instance;
+ static Future<User?> signUpWithEmailAndPassword(String email,
+      String password,context) async {
+    try {
+      UserCredential credential = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      Navigator.pushReplacementNamed(context, SignIn.routeName);
+      return credential.user;
+
+     } catch (e) {
+       //print('Registration error: $e');
+       // Show an error message to the user
+       ScaffoldMessenger.of(context).showSnackBar(
+         const SnackBar(
+           content: Text('Registration failed. Please try another email or login .'),
+           backgroundColor: Colors.red,
+         ),
+       );
+    }
+
+    return null;
+  }
+
+
+
+
 
   static getUserCollection(){
     return FirebaseFirestore.instance.collection("users").withConverter<MyUser>

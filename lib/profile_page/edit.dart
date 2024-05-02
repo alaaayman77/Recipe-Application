@@ -46,7 +46,7 @@ class _EditProfileState extends State<EditProfile> {
         'name': globalUsername ,
         'email': globalEmail ,
         'password' : globalPassword ,
-        'phone': globalPhone ,
+        //'phone': globalPhone ,
       });
 
 

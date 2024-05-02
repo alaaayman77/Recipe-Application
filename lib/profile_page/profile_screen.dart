@@ -91,10 +91,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 const SizedBox(height: 10),
 
-                ListTile(
-                  leading: Icon(Icons.phone , color:Theming.primary,),
-                  title: Text('${globalPhone}', style: Theme.of(context).textTheme.titleMedium),
-                ),
+                // ListTile(
+                //   leading: Icon(Icons.phone , color:Theming.primary,),
+                //   title: Text('${globalPhone}', style: Theme.of(context).textTheme.titleMedium),
+                // ),
 
 
                 const SizedBox(
@@ -111,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           "name": '${globalUsername}',
                           "email": '${globalEmail}',
                           "password": '${globalPassword}',
-                          "phone": '${globalPhone}',
+                          //"phone": '${globalPhone}',
                           "obsucre": widget.obsucre,
                         },
                       );
@@ -122,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           globalUsername= result['name'];
                           globalEmail = result['email'];
                           globalPassword= result['password'];
-                          globalPhone = result['phone'];
+                          //globalPhone = result['phone'];
                         });
                       }
                     },
