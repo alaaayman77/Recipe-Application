@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/favorite_page/favorite_page.dart';
+import 'package:final_project/firebase_options.dart';
 import 'package:final_project/home_page/home_page.dart';
-import 'package:final_project/introduction_screen/IntroductionScreen.dart';
 import 'package:final_project/profile_page/edit.dart';
 import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/profile_page/profile_screen.dart';
@@ -20,7 +20,10 @@ import 'package:provider/provider.dart';
 void main()async {
   // initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // await Firebase.initializeApp();
   // Access data offline
   await FirebaseFirestore.instance.disableNetwork();
   // CACHE_SIZE_UNLIMITED
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-       initialRoute: SignIn.routeName,
+       initialRoute: SplashScreen.routeName,
         routes: {
           SplashScreen.routeName:(context) =>SplashScreen(),
           SignIn.routeName: (context) =>  SignIn(),
@@ -54,7 +57,6 @@ class MyApp extends StatelessWidget {
           SettingsPage.routeName: (context) => const SettingsPage(),
           RecipeDetails.routeName: (context) =>  RecipeDetails(),
           EditProfile.routeName: (context) => EditProfile(),
-
         },
         theme: Theming.lightTheme,
         // darkTheme: Theming.DarkTheme,
