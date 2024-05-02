@@ -2,7 +2,6 @@
 import 'package:final_project/error_model/alert_dialog.dart';
 import 'package:final_project/settings_page/settings_container.dart';
 import 'package:final_project/settings_page/theming_bottom_sheet.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,28 +38,28 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: SafeArea(
-              child: Text(
-                'Settings',
-                style: Theme.of(context).textTheme.titleLarge,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: SafeArea(
+                child: Text(
+                  'Settings',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: Column(
+          Column(
             children: [
               SettingsContainer(title: 'About', openBottomSheet: AboutBottomSheet),
               SizedBox(height: 20),
               SettingsContainer(title: 'Contact us', openBottomSheet: ContactUsBottomSheet),
               SizedBox(height: 20),
               SettingsContainer(title: 'Theming', openBottomSheet: ThemingBottomSheet),
-              Spacer(),
+
               InkWell(
                 onTap: () {
                   showDialog(
@@ -106,9 +105,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ],
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
 
 

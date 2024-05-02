@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 void main()async {
   // initialize firebase
   WidgetsFlutterBinding.ensureInitialized();
+  await AppConfigProvider.init();
   await Firebase.initializeApp();
   // Access data offline
   await FirebaseFirestore.instance.disableNetwork();
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
         builder: (context, provider, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: SignUp.routeName,
+            initialRoute:SplashScreen.routeName,
             routes: {
               SplashScreen.routeName: (context) => SplashScreen(),
               SignIn.routeName: (context) => SignIn(),
