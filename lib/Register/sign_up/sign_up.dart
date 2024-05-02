@@ -1,8 +1,15 @@
 import 'package:final_project/Register/CustomTextField.dart';
 import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/app_config_provider.dart';
+import '../../theming.dart';
 
+String? globalUsername;
+String? globalEmail;
+String? globalPassword;
+String? globalPhone='';
 class SignUp extends StatefulWidget {
   static const routeName = "SignUp";
   @override
@@ -36,6 +43,9 @@ class _SignupScreenState extends State<SignUp> {
       String password = _passwordController.text;
       Navigator.pushReplacementNamed(context, SignIn.routeName);
       // Perform signup operation with collected data
+      globalUsername = _usernameController.text;
+      globalEmail = _emailController.text;
+      globalPassword = _passwordController.text;
       print('Email: $email');
       //print('Username: $Username');
       print('Password: $password');
@@ -44,6 +54,7 @@ class _SignupScreenState extends State<SignUp> {
   bool hidden = true;
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return Scaffold(
       body: ListView(
         children: [
@@ -55,7 +66,7 @@ class _SignupScreenState extends State<SignUp> {
                   'Sign Up',
                   style: TextStyle(
                     fontSize: 40.0,
-                    color: Colors.green,
+                    color: provider.appTheme== ThemeMode.light ? Theming.primary : Theming.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -73,6 +84,7 @@ class _SignupScreenState extends State<SignUp> {
                           color: Colors.grey[200],
                         ),
                         child: CustomTextField(
+
                           controller: _emailController,
                             label: 'Email',
                             prefixIcon: Icons.email,
@@ -100,6 +112,7 @@ class _SignupScreenState extends State<SignUp> {
                         child: CustomTextField(
                           controller: _usernameController,
                             label: 'Username',
+
                             prefixIcon: Icons.person, // Icon for username field
 
                           validator: (value) {
@@ -181,7 +194,7 @@ class _SignupScreenState extends State<SignUp> {
                       ElevatedButton(
                         onPressed: _submitForm,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Background color
+                          backgroundColor: Theming.primary, // Background color
                           padding: EdgeInsets.symmetric(vertical: 15.0), // Button padding
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0), // Button border radius

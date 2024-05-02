@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 
+import '../provider/app_config_provider.dart';
 import '../theming.dart';
 
 
@@ -12,6 +14,7 @@ class Instruction extends StatelessWidget{
   Instruction({required this.title , required this.instructions});
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
    return Column(
      crossAxisAlignment: CrossAxisAlignment.start,
      children: [
@@ -35,7 +38,7 @@ class Instruction extends StatelessWidget{
                stepTexts.join('\n\n'),
                trimMode: TrimMode.Line,
                trimLines: 5,
-               colorClickableText: Theming.deepBlue,
+               colorClickableText: provider.appTheme==ThemeMode.dark ? Theming.white: Theming.deepBlue,
                trimCollapsedText: 'Show more',
                trimExpandedText: 'Show less',
                style: Theme.of(context)

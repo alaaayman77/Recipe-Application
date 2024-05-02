@@ -99,7 +99,7 @@ class CustomSearch extends SearchDelegate {
     } else {
       return Center(
         child: Text("no item found",
-            style: Theme.of(context).textTheme.titleMedium),
+            style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.primary)),
       );
 
     }

@@ -1,7 +1,11 @@
 import 'package:final_project/theming.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
+
+import '../Register/sign_up/sign_up.dart';
+import '../provider/app_config_provider.dart';
 
 
 
@@ -37,14 +41,18 @@ class _EditProfileState extends State<EditProfile> {
       String email = _emailController.text.trim();
       String password = _passwordController.text;
 
-      arguments["name"] = _usernameController.text;
-      arguments["email"] = _emailController.text;
-      arguments["pass"] = _passwordController.text;
-      arguments["phone"] = _phoneController.text;
+
+      Navigator.pop(context , {
+        'name': globalUsername ,
+        'email': globalEmail ,
+        'password' : globalPassword ,
+        'phone': globalPhone ,
+      });
+
 
       Toast.show("Changes Saved", duration: Toast.lengthLong, gravity:Toast.bottom,backgroundColor: Theming.primary,);
 
-      Navigator.pop(context);
+
 
 
       print('Email: $email');
@@ -60,24 +68,22 @@ class _EditProfileState extends State<EditProfile> {
 
   @override
   Widget build(BuildContext context) {
-
+    var provider = Provider.of<AppConfigProvider>(context);
     ToastContext().init(context);
 
-
-     arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-
-
-    print(arguments['name']);
-    _usernameController.text = arguments['name'];
-    _passwordController.text = arguments['pass'];
-    _phoneController.text= arguments["phone"];
-    _emailController.text= arguments['email'];
+    if(arguments==null){
+      arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+      _usernameController.text = arguments['name']??'';
+      _passwordController.text = arguments['password']??'';
+      _phoneController.text= arguments["phone"]??'';
+      _emailController.text= arguments['email']??'';
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile"),
+        title: Text("Edit Profile" ,style: Theme.of(context).textTheme.titleLarge),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: provider.appTheme==ThemeMode.light? Colors.black:Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -100,14 +106,18 @@ class _EditProfileState extends State<EditProfile> {
                       color: Colors.grey[200],
                     ),
                     child: TextFormField(
+                      style:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.darkBlue) ,
                       controller: _usernameController,
+
                       decoration: InputDecoration(
                         labelText: 'Name',
+                        labelStyle:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.secondaryText),
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.person), // Icon for username field
+                        prefixIcon: Icon(Icons.person , color: Theming.primary,), // Icon for username field
                       ),
                       keyboardType: TextInputType.text,
+
                       // validator: (value) {
                       //   if (value == null || value.isEmpty) {
                       //     return 'Please enter your username';
@@ -126,13 +136,15 @@ class _EditProfileState extends State<EditProfile> {
                       color: Colors.grey[200],
                     ),
                     child: TextFormField(
+                      style:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.darkBlue) ,
                       controller: _emailController,
 
                       decoration: InputDecoration(
                         labelText: 'Email',
+                        labelStyle:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.secondaryText),
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: Icon(Icons.email , color: Theming.primary),
                       ),
 
 
@@ -164,12 +176,14 @@ class _EditProfileState extends State<EditProfile> {
                       color: Colors.grey[200],
                     ),
                     child: TextFormField(
+                      style:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.darkBlue) ,
                       controller: _passwordController,
                       decoration: InputDecoration(
                         labelText: 'Password',
+                        labelStyle:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.secondaryText),
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: Icon(Icons.lock , color: Theming.primary),
                       ),
                       obscureText: true,
                       validator: (value) {
@@ -190,12 +204,14 @@ class _EditProfileState extends State<EditProfile> {
                       color: Colors.grey[200],
                     ),
                     child: TextFormField(
+                      style:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.darkBlue) ,
                       controller: _phoneController,
                       decoration: InputDecoration(
                         labelText: 'phone',
+                        labelStyle:Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.secondaryText),
                         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
                         border: InputBorder.none,
-                        prefixIcon: Icon(Icons.phone),
+                        prefixIcon: Icon(Icons.phone , color: Theming.primary,),
                       ),
                       // validator: (value) {
                       //   if (value == null || value.isEmpty) {
@@ -221,7 +237,7 @@ class _EditProfileState extends State<EditProfile> {
                           style: TextStyle(
                               fontSize: 15,
                               letterSpacing: 2,
-                              color: Colors.black
+                              color: provider.appTheme == ThemeMode.light ? Colors.black : Colors.white
                           ),
                         ),
                         style: OutlinedButton.styleFrom(
@@ -238,7 +254,7 @@ class _EditProfileState extends State<EditProfile> {
                             color: Colors.white
                         )),
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
+                            backgroundColor: Theming.primary,
                             padding: EdgeInsets.symmetric(horizontal: 50),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20))

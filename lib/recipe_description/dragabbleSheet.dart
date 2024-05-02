@@ -4,9 +4,12 @@ import 'package:final_project/recipe_description/recipe_container.dart';
 import 'package:final_project/recipe_description/similar_recipe.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../model/RandomRecipeResponse.dart';
 import 'package:html/parser.dart' as html_parser;
 
+import '../provider/app_config_provider.dart';
+import '../theming.dart';
 import 'ingredients.dart';
 
 class DragabbleSheet extends StatefulWidget {
@@ -27,6 +30,7 @@ class DragabbleSheet extends StatefulWidget {
 class _DragabbleSheetState extends State<DragabbleSheet> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<AppConfigProvider>(context);
     return DraggableScrollableSheet(
       initialChildSize: 0.65, // Start at 65% of the screen height
       minChildSize: 0.65, // Sheet will always be at least 65% of the screen height
@@ -34,7 +38,7 @@ class _DragabbleSheetState extends State<DragabbleSheet> {
       builder: (BuildContext context, ScrollController scrollController) {
         return Container(
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: provider.appTheme==ThemeMode.dark?Theming.darkBlue:Theming.white,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40))),

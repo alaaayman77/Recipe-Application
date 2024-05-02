@@ -3,6 +3,10 @@ import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/transition/transition.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/app_config_provider.dart';
+import '../../theming.dart';
 
 
 
@@ -39,8 +43,7 @@ class LoginScreenState extends State<SignIn> {
   bool hidden = true;
   @override
   Widget build (BuildContext context){
-//wrong place
-
+    var provider = Provider.of<AppConfigProvider>(context);
     return Scaffold(
         body: ListView(
           children: [
@@ -48,7 +51,9 @@ class LoginScreenState extends State<SignIn> {
                 children:[
                   Padding(
                     padding: EdgeInsets.only(top: 150.0, left:16.0, right:16.0),
-                    child: Text('Log In',style: TextStyle(fontSize: 40.0, color: Colors.green, fontWeight: FontWeight.bold),),
+                    child: Text('Log In',style: TextStyle(fontSize: 40.0,   color: provider.appTheme== ThemeMode.light ?
+                    Theming.primary : Theming.white,
+                        fontWeight: FontWeight.bold),),
                   ),
 
                   Padding(padding: EdgeInsets.all(16.0),
@@ -128,7 +133,7 @@ class LoginScreenState extends State<SignIn> {
                             ElevatedButton(
                               onPressed: submitForm,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green,
+                                backgroundColor: Theming.primary,
                                 padding: EdgeInsets.symmetric(vertical: 15.0),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),

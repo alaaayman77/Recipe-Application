@@ -1,9 +1,12 @@
-import 'package:final_project/error_model/error_item.dart';
+
+import 'package:final_project/error_model/alert_dialog.dart';
 import 'package:final_project/settings_page/settings_container.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:final_project/settings_page/theming_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../Register/sign_up/sign_up.dart';
+import '../provider/app_config_provider.dart';
 import '../theming.dart';
 import 'info_screen.dart';
 
@@ -29,85 +32,43 @@ class _SettingsPageState extends State<SettingsPage> {
     showModalBottomSheet(context: context, builder: (BuildContext context)=> InfoScreen(content: '7201 W. 129th St., Ste 160Overland Park. KS 66213 Phone: 913.492.5900  •  800.227.7282 Fax: 913.492.5947Business Hours:Mon.-Fri. 7:45 am – 4:30 pm CST'));
   }
   void ThemingBottomSheet(){
-    showModalBottomSheet(context: context, builder: (BuildContext context)=>Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            InkWell(child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Light Mode' , style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Theming.primary),),
-                Icon(Icons.check_rounded , color: Theming.primary,)
-              ],
-            )),
-            InkWell(child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Dark Mode' , style: Theme.of(context).textTheme.titleMedium,),
-                Icon(Icons.check_rounded)
-              ],
-            )),
 
-          ],
-        ),
-      ),
-    ));
-  }
-  Future<bool> _onWillPop() async {
-    return false;
+    showModalBottomSheet(context: context, builder: (BuildContext context)=>ThemingggBottomSheet());
   }
   @override
   Widget build(BuildContext context) {
-    return PopScope(child:  Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: SafeArea(
-              child: Text(
-                'Settings',
-                style: Theme.of(context).textTheme.titleLarge,
+    var provider = Provider.of<AppConfigProvider>(context);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: SafeArea(
+                child: Text(
+                  'Settings',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: Column(
+          Column(
             children: [
               SettingsContainer(title: 'About', openBottomSheet: AboutBottomSheet),
               SizedBox(height: 20),
               SettingsContainer(title: 'Contact us', openBottomSheet: ContactUsBottomSheet),
               SizedBox(height: 20),
+              SettingsContainer(title: 'Theming', openBottomSheet: ThemingBottomSheet),
 
-              Spacer(),
               InkWell(
                 onTap: () {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Logout Confirmation'),
-                        content: Text('Are you sure you want to logout?'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('No'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).popUntil(ModalRoute.withName(SignUp.routeName));
-                              Navigator.of(context).pushNamed(SignUp.routeName);
-
-                            },
-                            child: Text('Yes'),
-                          ),
-                        ],
-                      );
+                      return AlertDialogModel(title: 'Logout Confirmation',
+                          content: 'Are you sure you want to log out?', button1: 'No',
+                          button2: 'Yes', onPressedButton1:onNoPressed,
+                          onPressedButton2: onYesPressed);
                     },
                   );
                 },
@@ -144,9 +105,21 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
             ],
-          ),
-        )
-      ],
-    ), );
+          )
+        ],
+      ),
+    );
 
-  }}
+
+  }
+  void onNoPressed() {
+    Navigator.of(context).pop();
+  }
+
+  void onYesPressed() {
+    Navigator.of(context).popUntil(ModalRoute.withName(SignUp.routeName));
+    Navigator.of(context).pushNamed(SignUp.routeName);
+
+
+  }
+}
