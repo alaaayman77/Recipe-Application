@@ -1,6 +1,7 @@
 //Class have all firebase functions
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
+import 'package:final_project/model/myUser.dart';
 
 class FirebaseUtils{
   // method to get recipe collection from firebase
@@ -30,6 +31,21 @@ class FirebaseUtils{
     var docRef = recipeCollection.doc(recipe.id.toString());
     return docRef.delete();
   }
+
+  static getUserCollection(){
+    return FirebaseFirestore.instance.collection("users").withConverter<MyUser>
+      (
+        fromFirestore: (snapshot, options) => MyUser.fromFireStore(snapshot.data()!),
+        toFirestore: (myUser, options) => myUser.toFireStore(),
+    );
+  }
+
+  static Future<void> addUserToFirestore(Recipes myUser){
+    var userCollection = getUserCollection();
+    var docRef = userCollection.doc(myUser.id);
+    return docRef.set(myUser);
+  }
+
 
 
 }

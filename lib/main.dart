@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/favorite_page/favorite_page.dart';
+import 'package:final_project/firebase_options.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/introduction_screen/IntroductionScreen.dart';
 import 'package:final_project/profile_page/edit.dart';
