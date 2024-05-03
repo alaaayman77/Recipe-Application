@@ -1,4 +1,5 @@
 import 'package:final_project/Register/CustomTextField.dart';
+import 'package:final_project/Register/forgotpassword/ForgotPassWord.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/transition/transition.dart';
@@ -159,20 +160,21 @@ class LoginScreenState extends State<SignIn> {
                           height: 3.0,
                         ),
 
-                        // Container(
-                        //   padding: EdgeInsets.all(10.0),
-                        //   child: TextButton(
-                        //     onPressed: () {
-                        //     },
-                        //     child: Text(
-                        //       'Forgot Password?',
-                        //       style: TextStyle(
-                        //         color: Colors.blue,
-                        //         fontWeight: FontWeight.bold,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+                        Container(
+                          padding: EdgeInsets.all(10.0),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context,ForgotPassword.routeName);
+                            },
+                            child: Text(
+                              'Forgot Password?',
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
 
                         Container(
                           padding: EdgeInsets.all(10.0),
