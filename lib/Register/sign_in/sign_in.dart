@@ -13,6 +13,7 @@ String? globalEmail;
 String? globalPassword;
 
 class SignIn extends StatefulWidget {
+
   static const String routeName = "SignIn";
   @override
   LoginScreenState createState() => LoginScreenState();

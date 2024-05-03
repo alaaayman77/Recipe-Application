@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project/Register/forgotpassword/ForgotPassWord.dart';
 import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/favorite_page/favorite_page.dart';
@@ -64,6 +65,7 @@ class MyApp extends StatelessWidget {
               SplashScreen.routeName: (context) => SplashScreen(),
               SignIn.routeName: (context) => SignIn(),
               SignUp.routeName: (context) => SignUp(),
+              ForgotPassword.routeName: (context) => ForgotPassword(),
               Transition.routeName: (context) => const Transition(),
               FavoritePage.routeName: (context) => FavoritePage(),
               ProfilePage.routeName: (context) => const ProfilePage(),

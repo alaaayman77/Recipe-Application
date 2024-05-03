@@ -110,8 +110,7 @@ class _SignupScreenState extends State<SignUp> {
                               return 'Please enter a valid Gmail address';
                             }
 
-                            // You can add more sophisticated email validation here if needed
-                            return null;
+                             return null;
                           },
                         ),
                       ),
