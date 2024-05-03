@@ -1,5 +1,6 @@
 import 'package:final_project/Register/CustomTextField.dart';
 import 'package:final_project/Register/sign_in/sign_in.dart';
+import 'package:final_project/model/myUser.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:final_project/firebase_utils/FirebaseUtils.dart';
@@ -27,8 +28,9 @@ class _SignupScreenState extends State<SignUp> {
   void _submitForm() async{
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text.trim();
-      //String username = _usernameController.text.trim();
+      String username = _usernameController.text.trim();
       String password = _passwordController.text;
+
       // signup operation with collected data
       //  globalEmail = _emailController.text;
       //  globalUsername = _usernameController.text;
@@ -36,7 +38,8 @@ class _SignupScreenState extends State<SignUp> {
       //  print('Email: $email');
       //  print('Username: $username');
       //  print('Password: $password');
-      FirebaseUtils.signUpWithEmailAndPassword(email,password,context);
+      
+      FirebaseUtils.signUpWithEmailAndPassword(email,password,context,username);
 
     }
   }

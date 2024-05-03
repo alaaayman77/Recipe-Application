@@ -1,5 +1,6 @@
 import 'package:final_project/firebase_utils/FirebaseUtils.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
+import 'package:final_project/model/myUser.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +22,9 @@ class _saveItemState extends State<saveItem> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     var provider=Provider.of<FavoriteProvider>(context);
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as MyUser;
     if(provider.recipes.isEmpty){
-      provider.getRecipesFromFireStore();
+      provider.getRecipesFromFireStore(arguments.id??"");
     }
     isFavorite=provider.checkExist(widget.recipe!);
   }
@@ -30,6 +32,8 @@ class _saveItemState extends State<saveItem> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments) as MyUser;
+
     var provider = Provider.of<FavoriteProvider>(context);
     return
       Container(
@@ -42,7 +46,9 @@ class _saveItemState extends State<saveItem> {
         ),
         child: InkWell(
           onTap: (){
-            provider.onClickedRecipe(widget.recipe!,isFavorite);
+            provider.onClickedRecipe(widget.recipe!,isFavorite,arguments.id??"");
+            print("===========================");
+            print(arguments.id);
           },
           child: Center(
             child :provider.checkExist(widget.recipe!)?Icon(Icons.favorite,color: Colors.red):Icon(Icons.favorite_border_rounded,color: Colors.black)),

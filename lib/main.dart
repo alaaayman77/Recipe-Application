@@ -9,6 +9,7 @@ import 'package:final_project/profile_page/edit.dart';
 import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/profile_page/profile_screen.dart';
 import 'package:final_project/provider/app_config_provider.dart';
+import 'package:final_project/provider/auth_provider.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:final_project/recipe_description/recipe_details.dart';
 import 'package:final_project/settings_page/settings_page.dart';
@@ -31,10 +32,10 @@ void main()async {
   await AppConfigProvider.init();
   // await Firebase.initializeApp();
   // Access data offline
-  await FirebaseFirestore.instance.disableNetwork();
+  // await FirebaseFirestore.instance.disableNetwork();
   // CACHE_SIZE_UNLIMITED
-  FirebaseFirestore.instance.settings =
-       Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
+  // FirebaseFirestore.instance.settings =
+  //      Settings(cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED);
 
   runApp(MyApp());
 }
@@ -51,6 +52,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => FavoriteProvider()),
         ChangeNotifierProvider(create: (_) => AppConfigProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+
       ],
       child: Consumer<AppConfigProvider>(
         builder: (context, provider, child) {

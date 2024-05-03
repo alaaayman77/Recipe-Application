@@ -3,6 +3,7 @@ import 'package:final_project/firebase_utils/FirebaseUtils.dart';
 import 'package:final_project/home_page/recipe_info.dart';
 import 'package:final_project/home_page/recipe_image.dart';
 import 'package:final_project/home_page/save_item.dart';
+import 'package:final_project/model/myUser.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,12 +21,17 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments) as MyUser;
+
+
+
     var provider = Provider.of<FavoriteProvider>(context);
     if(provider.recipes.isEmpty)
       {
-        provider.getRecipesFromFireStore();
+        provider.getRecipesFromFireStore(arguments.id??"");
       }
     return
        Padding(
