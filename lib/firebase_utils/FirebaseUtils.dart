@@ -91,13 +91,13 @@ class FirebaseUtils{
  }
 
   static Future<User?> signInWithEmailAndPassword(
-      String email, String password, context,String userName) async {
+      String email, String password, context) async {
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       readUser(credential.user?.uid ??"");
 
-      Navigator.pushReplacementNamed(context, Transition.routeName,arguments: MyUser(id: credential.user?.uid ??"", email: email, userName: userName));
+      Navigator.pushReplacementNamed(context, Transition.routeName,arguments: {"id":credential.user?.uid??""});
       return credential.user;
     } catch (e) {
       //print('Registration error: $e');

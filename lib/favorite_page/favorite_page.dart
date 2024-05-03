@@ -24,14 +24,14 @@ class _FavoritePageState extends State<FavoritePage> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments) as MyUser;
+    final arguments = (ModalRoute.of(context)?.settings.arguments)as Map;
 
 
 
     var provider = Provider.of<FavoriteProvider>(context);
     if(provider.recipes.isEmpty)
       {
-        provider.getRecipesFromFireStore(arguments.id??"");
+        provider.getRecipesFromFireStore(arguments['id']);
       }
     return
        Padding(

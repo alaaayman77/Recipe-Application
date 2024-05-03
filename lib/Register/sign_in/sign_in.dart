@@ -30,7 +30,7 @@ class LoginScreenState extends State<SignIn> {
     if (formKey.currentState!.validate()) {
       String email = emailController.text.trim();
       String password = passwordController.text;
-      FirebaseUtils.signInWithEmailAndPassword(email, password, context,"tasneem");
+      FirebaseUtils.signInWithEmailAndPassword(email, password, context);
       print('Email: $email');
       print('Password: $password');
     }

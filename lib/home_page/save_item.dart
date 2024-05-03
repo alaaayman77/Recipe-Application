@@ -17,14 +17,13 @@ class saveItem extends StatefulWidget {
 class _saveItemState extends State<saveItem> {
 
   bool isFavorite = false;
-
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     var provider=Provider.of<FavoriteProvider>(context);
-    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as MyUser;
+     final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
     if(provider.recipes.isEmpty){
-      provider.getRecipesFromFireStore(arguments.id??"");
+      provider.getRecipesFromFireStore(arguments["id"]);
     }
     isFavorite=provider.checkExist(widget.recipe!);
   }
@@ -32,8 +31,8 @@ class _saveItemState extends State<saveItem> {
 
   @override
   Widget build(BuildContext context) {
-    final arguments = (ModalRoute.of(context)?.settings.arguments) as MyUser;
 
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
     var provider = Provider.of<FavoriteProvider>(context);
     return
       Container(
@@ -46,9 +45,9 @@ class _saveItemState extends State<saveItem> {
         ),
         child: InkWell(
           onTap: (){
-            provider.onClickedRecipe(widget.recipe!,isFavorite,arguments.id??"");
+            provider.onClickedRecipe(widget.recipe!,isFavorite,arguments["id"]);
             print("===========================");
-            print(arguments.id);
+            print(arguments["id"]);
           },
           child: Center(
             child :provider.checkExist(widget.recipe!)?Icon(Icons.favorite,color: Colors.red):Icon(Icons.favorite_border_rounded,color: Colors.black)),
