@@ -1,12 +1,12 @@
 import 'package:final_project/Register/CustomTextField.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
-import 'package:final_project/home_page/home_page.dart';
-import 'package:final_project/transition/transition.dart';
+ import 'package:final_project/transition/transition.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/app_config_provider.dart';
 import '../../theming.dart';
+import '../forgotpassword/ForgotPassWord.dart';
 
 
 
@@ -21,7 +21,7 @@ class LoginScreenState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-   bool isChecked = false;// the right place :)
+   bool isChecked = false;
 
 
   @override
@@ -50,13 +50,13 @@ class LoginScreenState extends State<SignIn> {
             Column(
                 children:[
                   Padding(
-                    padding: EdgeInsets.only(top: 150.0, left:16.0, right:16.0),
+                    padding: const EdgeInsets.only(top: 150.0, left:16.0, right:16.0),
                     child: Text('Log In',style: TextStyle(fontSize: 40.0,   color: provider.appTheme== ThemeMode.light ?
                     Theming.primary : Theming.white,
                         fontWeight: FontWeight.bold),),
                   ),
 
-                  Padding(padding: EdgeInsets.all(16.0),
+                  Padding(padding: const EdgeInsets.all(16.0),
                       child: Form(
                         key: formKey,
                         child: Column(
@@ -81,7 +81,7 @@ class LoginScreenState extends State<SignIn> {
                                   },
                                 )
                             ),
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
 
                             Container(
                               child: CustomTextField(
@@ -111,7 +111,7 @@ class LoginScreenState extends State<SignIn> {
                               ),
 
                             ),
-                            SizedBox(height: 5.0,),
+                            const SizedBox(height: 5.0,),
 
 
                             // Container(
@@ -129,44 +129,45 @@ class LoginScreenState extends State<SignIn> {
                             //     controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
                             //   ),
                             // ),
-                            SizedBox(height: 35.0,),
+                            const SizedBox(height: 35.0,),
                             ElevatedButton(
                               onPressed: submitForm,
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Theming.primary,
-                                padding: EdgeInsets.symmetric(vertical: 15.0),
+                                padding: const EdgeInsets.symmetric(vertical: 15.0),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              child: Text('Log In', style: TextStyle  (fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),),
+                              child: const Text('Log In', style: TextStyle  (fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),),
                             ),
-                            SizedBox(height: 3.0,),
-
-                            // Container(
-                            //   padding: EdgeInsets.all(10.0),
-                            //   child: TextButton(
-                            //     onPressed: () {
-                            //     },
-                            //     child: Text(
-                            //       'Forgot Password?',
-                            //       style: TextStyle(
-                            //         color: Colors.blue,
-                            //         fontWeight: FontWeight.bold,
-                            //       ),
-                            //     ),
-                            //   ),
-                            // ),
+                            const SizedBox(height: 3.0,),
 
                             Container(
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
+                              child: TextButton(
+                                onPressed:() {
+                                  Navigator.pushReplacementNamed(context, ForgotPassword.routeName);
+                                  },
+                                child: const Text(
+                                  'Forgot Password?',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            Container(
+                              padding: const EdgeInsets.all(10.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('Don\'t have an account?', style: TextStyle(color: Colors.grey),),
+                                  const Text('Don\'t have an account?', style: TextStyle(color: Colors.grey),),
                                   TextButton(onPressed: (){
                                     Navigator.pushReplacementNamed(context, SignUp.routeName);
-                                  }, child: Text('Sign up', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),),),
+                                  }, child: const Text('Sign up', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),),),
                                 ],
                               ),
                             )
