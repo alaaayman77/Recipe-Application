@@ -4,13 +4,15 @@ import 'package:final_project/Register/sign_in/sign_in.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/favorite_page/favorite_page.dart';
 import 'package:final_project/firebase_options.dart';
+import 'package:final_project/firebase_utils/FirebaseUtils.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/introduction_screen/IntroductionScreen.dart';
+import 'package:final_project/profile_page/EditNewPassword.dart';
 import 'package:final_project/profile_page/edit.dart';
 import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/profile_page/profile_screen.dart';
+import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/provider/app_config_provider.dart';
-import 'package:final_project/provider/auth_provider.dart';
 import 'package:final_project/provider/favorite_provider.dart';
 import 'package:final_project/recipe_description/recipe_details.dart';
 import 'package:final_project/settings_page/settings_page.dart';
@@ -31,6 +33,7 @@ void main()async {
   );
   // await Firebase.initializeApp();
   await AppConfigProvider.init();
+  await ProviderAuth.init();
   // await Firebase.initializeApp();
   // Access data offline
   // await FirebaseFirestore.instance.disableNetwork();
@@ -53,8 +56,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => FavoriteProvider()),
         ChangeNotifierProvider(create: (_) => AppConfigProvider()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-
+        ChangeNotifierProvider(create: (_) =>ProviderAuth(),
+        )
       ],
       child: Consumer<AppConfigProvider>(
         builder: (context, provider, child) {
@@ -63,16 +66,19 @@ class MyApp extends StatelessWidget {
             initialRoute:SplashScreen.routeName,
             routes: {
               SplashScreen.routeName: (context) => SplashScreen(),
+              IntroductionScreen.routeName:(context) => IntroductionScreen(),
               SignIn.routeName: (context) => SignIn(),
               SignUp.routeName: (context) => SignUp(),
               ForgotPassword.routeName: (context) => ForgotPassword(),
-              Transition.routeName: (context) => const Transition(),
+              Transition.routeName: (context) =>  Transition(),
               FavoritePage.routeName: (context) => FavoritePage(),
-              ProfilePage.routeName: (context) => const ProfilePage(),
-              HomePage.routeName: (context) => const HomePage(),
-              SettingsPage.routeName: (context) => const SettingsPage(),
+              ProfilePage.routeName: (context) =>  ProfilePage(),
+              HomePage.routeName: (context) =>  HomePage(),
+              SettingsPage.routeName: (context) =>  SettingsPage(),
               RecipeDetails.routeName: (context) => RecipeDetails(),
+              EditNewPassword.routeName:(context) => EditNewPassword(),
               EditProfile.routeName: (context) => EditProfile(),
+
             },
             theme: Theming.lightTheme,
             darkTheme: Theming.darkTheme,

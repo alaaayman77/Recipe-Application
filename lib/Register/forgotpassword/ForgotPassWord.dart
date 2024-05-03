@@ -61,24 +61,24 @@ class _ForgotPasswordPageState extends State<ForgotPassword> {
                 prefixIcon: Icons.email,
               ),
               SizedBox(height: 20.0),
-              // ElevatedButton(
-              //   onPressed: _resetPassword,
-              //   style: ElevatedButton.styleFrom(
-              //     backgroundColor: Theming.primary,
-              //     padding:   EdgeInsets.symmetric(vertical: 10.0),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(12.0),
-              //     ),
-              //   ),
-              //   child:   Text(
-              //     'Reset password',
-              //     style: TextStyle(
-              //       fontSize: 18.0,
-              //       fontWeight: FontWeight.bold,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
+              ElevatedButton(
+                onPressed: _resetPassword,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theming.primary,
+                  padding:   EdgeInsets.symmetric(vertical: 10.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                ),
+                child:   Text(
+                  'Reset password',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -86,34 +86,34 @@ class _ForgotPasswordPageState extends State<ForgotPassword> {
     );
   }
 
-  // Future _resetPassword() async {
-  //   try {
-  //     await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim(),);
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Password reset email sent. Check your inbox.'),
-  //       ),
-  //     );
-  //   } on FirebaseAuthException catch (e) {
-  //     print(e.code);
-  //     print(e.message);
-  //     // ScaffoldMessenger.of(context).showSnackBar(
-  //     //   SnackBar(
-  //     //     content: Text('Failed to send reset email: $e'),
-  //     //     backgroundColor: Colors.red,
-  //     //   ),
-  //     // );
-  //     print(e);
-  //     showDialog(
-  //       context: context,
-  //       builder: (context){
-  //         return AlertDialog(
-  //           content: Text(e.message.toString()),
-  //         );
-  //       },
-  //     );
-  //   }
-  //}
+  Future _resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim(),);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password reset email sent. Check your inbox.'),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      print(e.message);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to send reset email: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      print(e);
+      showDialog(
+        context: context,
+        builder: (context){
+          return AlertDialog(
+            content: Text(e.message.toString()),
+          );
+        },
+      );
+    }
+  }
 
   // Future _resetPassword() async {
   //   try {

@@ -1,12 +1,19 @@
+
+import 'package:final_project/firebase_utils/FirebaseUtils.dart';
+import 'package:final_project/model/myUser.dart';
+import 'package:final_project/profile_page/EditNewPassword.dart';
+import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import '../Register/sign_up/sign_up.dart';
 import '../theming.dart';
 import 'edit.dart';
 
-
+import 'dart:typed_data';
+import 'package:firebase_storage/firebase_storage.dart';
 
 
 
@@ -14,23 +21,45 @@ class ProfileScreen extends StatefulWidget {
 
   static const routeName ="ProfileScreen";
   ProfileScreen(
-      {Key? key, this.name="Ali",  this.email="Ali@gmail.com",  this.pass="1234567",  this.phone="11111111",required this.obsucre})
+      {Key? key,required this.obsucre})
       : super(key: key);
-
-  String? name;
+ String? uId;
+  String? name ;
   String? email;
   String? pass;
-  String? phone;
   bool obsucre;
-
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+ @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    widget.uId=ProviderAuth.prefs.getString('id');
+    widget.name=ProviderAuth.prefs.getString('name');
+    widget.email=ProviderAuth.prefs.getString('email');
+    widget.pass=ProviderAuth.prefs.getString('password');
+  }
+
   Uint8List? _image;
+  // @override
+  // initState() {
+  //   super.initState();
+  //    var data= FirebaseUtils.readUser(
+  //        "KFEjZBnpluahr79wdjn2VVYlTyy2");
+  //   widget.name=data['name'];
+  //   print(data['name']);
+  //   widget.email=data['email'];
+  //
+  //
+  // }
+
   @override
   Widget build(BuildContext context) {
+    var authProvider=Provider.of<ProviderAuth>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile" , style: Theme.of(context).textTheme.titleLarge,),
@@ -59,34 +88,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 ListTile(
                   leading: Icon(Icons.person , color:Theming.primary,),
-                  title: Text('${globalUsername}', style: Theme.of(context).textTheme.titleMedium),
+                  title: Text('${widget.name}', style: Theme.of(context).textTheme.titleMedium),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
+
                   leading: Icon(Icons.email , color:Theming.primary,),
-                  title: Text('${globalEmail}' ,style: Theme.of(context).textTheme.titleMedium),
+                  title: Text('${widget.email}' ,style: Theme.of(context).textTheme.titleMedium,overflow:TextOverflow.ellipsis,),
                 ),
 
                 const SizedBox(height: 10),
 
                 ListTile(
+                  onTap:() {
+                    Navigator.pushNamed(context,EditNewPassword.routeName);
+                    setState(() {
+                    });
+                  },
                   leading: Icon(Icons.lock , color:Theming.primary,),
-                  title: TextFormField(initialValue:'${globalPassword}',
+                  title: TextFormField(initialValue:'${widget.pass}',
                        style: Theme.of(context).textTheme.titleMedium,
-                    obscureText: widget.obsucre,readOnly: true,
+                    readOnly: true,
+                    obscureText: true,
                     decoration: InputDecoration(border: InputBorder.none,
-                  ),),
-                  trailing: IconButton(
-                      onPressed: (){
-                        widget.obsucre = !widget.obsucre;
-                        setState(() {
-                          print(widget.obsucre);
-                        });
-                      },
-                      icon:widget.obsucre? Icon(Icons.visibility_off):Icon(Icons.visibility),
-                      ),
+                  ),)
                 ),
 
                 const SizedBox(height: 10),
@@ -108,23 +135,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         context,
                         EditProfile.routeName,
                         arguments: {
-                          "name": '${globalUsername}',
-                          "email": '${globalEmail}',
-                          "password": '${globalPassword}',
-                          //"phone": '${globalPhone}',
+                          "uId":"${widget.uId}",
+                          "name": '${widget.name}',
+                          "email": '${widget.email}',
+                          "password": '${widget.pass}',
                           "obsucre": widget.obsucre,
                         },
                       );
 
                       // Update the profile screen if changes were made
-                      if (result != null && result is Map<String, dynamic>) {
-                        setState(() {
-                          globalUsername= result['name'];
-                          globalEmail = result['email'];
-                          globalPassword= result['password'];
-                          //globalPhone = result['phone'];
-                        });
-                      }
+                      // if (result != null && result is Map<String, dynamic>) {
+                      //   setState(() {
+                      //     widget.name= User?.userName;
+                      //     // globalEmail = result['email'];
+                      //     // globalPassword= result['password'];
+                      //     //globalPhone = result['phone'];
+                      //   });
+                      // }
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.all(15),

@@ -10,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class IntroductionScreen extends StatefulWidget {
+  static const String routeName='intro';
    const IntroductionScreen({super.key});
 
   @override
@@ -17,6 +18,7 @@ class IntroductionScreen extends StatefulWidget {
 }
 
 class _IntroductionScreenState extends State<IntroductionScreen> {
+
   PageController controller = PageController();
   bool lastPage = false;
 

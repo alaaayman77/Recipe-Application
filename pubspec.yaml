@@ -51,9 +51,11 @@ dependencies:
   firebase_auth: ^4.19.4
   flutter_native_splash: ^2.4.0
   equatable: ^2.0.5
+
 #  fluttertoast: ^8.2.5
   toast: ^0.3.0
   shared_preferences: ^2.2.3
+  firebase_storage: ^11.7.4
 flutter_launcher_icons:
   android : true
   ios: true

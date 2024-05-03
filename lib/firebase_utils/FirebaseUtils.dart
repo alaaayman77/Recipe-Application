@@ -3,18 +3,27 @@ import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/model/RandomRecipeResponse.dart';
 import 'package:final_project/model/myUser.dart';
+import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/transition/transition.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+
+
 
 import '../Register/sign_in/sign_in.dart';
 
 class FirebaseUtils{
+  static const routeName='firebase';
+
   // method to get recipe collection from firebase
-  static CollectionReference<Recipes> getRecipeCollection(String uid){
+
+  static CollectionReference<Recipes> getRecipeCollection(){
     // Create a CollectionReference called recipe that references the firestore collection
     // FirebaseFirestore.instance=> object of firebase
-    return getUserCollection().doc(uid).collection('recipe')
+    return getUserCollection().doc(ProviderAuth.prefs.getString('id')??"").collection('recipe')
     // make object has type
         .withConverter<Recipes>(
       // come to you as object
@@ -26,14 +35,14 @@ class FirebaseUtils{
 
   }
 
-  static Future<void> addFavoriteRecipe(Recipes recipe,String uid){
-    var recipeCollection = getRecipeCollection(uid);
+  static Future<void> addFavoriteRecipe(Recipes recipe){
+    var recipeCollection = getRecipeCollection();
     var docRef = recipeCollection.doc(recipe.id.toString());
     return docRef.set(recipe);
   }
 
-  static Future<void> deleteFavoriteRecipe(Recipes recipe,String uid){
-    var recipeCollection = getRecipeCollection(uid);
+  static Future<void> deleteFavoriteRecipe(Recipes recipe){
+    var recipeCollection = getRecipeCollection();
     var docRef = recipeCollection.doc(recipe.id.toString());
     return docRef.delete();
   }
@@ -54,6 +63,9 @@ class FirebaseUtils{
           email: email, password: password);
       MyUser myUser = MyUser(id: credential.user?.uid ??"", email: email, userName: userName);
       addUserToFirestore(myUser);
+      // var authProvider = Provider.of<ProviderAuth>(context,listen: false);
+      // authProvider.updateNewUser(myUser);
+
       Navigator.pushReplacementNamed(context, SignIn.routeName);
       return credential.user;
 
@@ -84,20 +96,40 @@ class FirebaseUtils{
 
 //   USe with sign in
 
- static readUser (String uid)async{
+ static Future<MyUser?> readUser (String uid)async{
    var snapShot = await getUserCollection().doc(uid).get();
    // data => user
-   return snapShot.data();
+   return snapShot.data() ;
  }
 
+ static Future<void> updateUserProfile({required String uid,String name='',String? image})async{
+   var snapshot= await getUserCollection().doc(uid).update(
+     {"name":name,
+       "image":image
+
+     }
+   );
+
+   ProviderAuth.prefs.setString('name',name);
+ }
   static Future<User?> signInWithEmailAndPassword(
-      String email, String password, context,String userName) async {
+      String email, String password, context) async {
+
+    // authProvider.myUser=null;
     try {
+
       UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      readUser(credential.user?.uid ??"");
 
-      Navigator.pushReplacementNamed(context, Transition.routeName,arguments: MyUser(id: credential.user?.uid ??"", email: email, userName: userName));
+       var User=await readUser(credential.user?.uid??"");
+//
+//       print('-----------------------------');
+//       print(User?.userName);
+//       print('-------------');
+      // print('${credential.user}');
+      var authProvider = Provider.of<ProviderAuth>(context,listen: false);
+      authProvider.updateNewUser(User);
+      Navigator.pushReplacementNamed(context, Transition.routeName,);
       return credential.user;
     } catch (e) {
       //print('Registration error: $e');
@@ -111,4 +143,5 @@ class FirebaseUtils{
       );
     }
   }
+
 }

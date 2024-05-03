@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/transition/transition.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
       Duration(seconds:3),
-          () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>IntroductionScreen(),
-        ),
-      ),
+          () => Navigator.pushReplacementNamed(context,ProviderAuth.checkLogin==false?IntroductionScreen.routeName:Transition.routeName)
+
     );
   }
 

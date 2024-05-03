@@ -1,9 +1,11 @@
+import 'package:flutter/services.dart';
+
 class MyUser {
   String? id;
   String? userName;
   String? email;
-
-  MyUser({required this.id,required this.email, required this.userName});
+  String? image;
+  MyUser({required this.id,required this.email, required this.userName,this.image});
 
 
   Map<String,dynamic> toFireStore(){
@@ -11,13 +13,15 @@ class MyUser {
       'id':id,
       'name':userName,
       'email':email,
+      'image':image
     };
   }
 
   MyUser.fromFireStore(Map<String,dynamic>?data):this(
       id: data?['id'],
-      userName: data?['userName'],
-      email: data?['email']
+      userName: data?['name'],
+      email: data?['email'],
+      image:data?['image']
   );
 
 }

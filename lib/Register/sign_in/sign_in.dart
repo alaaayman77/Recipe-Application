@@ -2,6 +2,7 @@ import 'package:final_project/Register/CustomTextField.dart';
 import 'package:final_project/Register/forgotpassword/ForgotPassWord.dart';
 import 'package:final_project/Register/sign_up/sign_up.dart';
 import 'package:final_project/home_page/home_page.dart';
+import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/transition/transition.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,15 +23,16 @@ class SignIn extends StatefulWidget {
 
 class LoginScreenState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text:'Ahmed@gmail.com');
+  TextEditingController passwordController = TextEditingController(text: '123456');
   bool isChecked = false; // the right place :)
-
   void submitForm() {
     if (formKey.currentState!.validate()) {
       String email = emailController.text.trim();
       String password = passwordController.text;
-      FirebaseUtils.signInWithEmailAndPassword(email, password, context,"tasneem");
+      ProviderAuth.prefs.setString('password',password);
+      FirebaseUtils.signInWithEmailAndPassword(email, password, context);
+
       print('Email: $email');
       print('Password: $password');
     }
@@ -46,6 +48,7 @@ class LoginScreenState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
+     var authProvider = Provider.of<ProviderAuth>(context);
     return Scaffold(
         body: ListView(
           children: [

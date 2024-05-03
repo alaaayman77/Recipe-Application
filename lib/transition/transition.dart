@@ -29,7 +29,7 @@ class _TransitionState extends State<Transition> {
             selectedIndex = index;
             setState(() {});
           },
-          items: const [
+          items:  [
             BottomNavigationBarItem(
               icon: Padding(
                 padding: EdgeInsets.all(3.0),
@@ -58,7 +58,7 @@ class _TransitionState extends State<Transition> {
 
 List<Widget> tabs = [
   const HomePage(),
-   FavoritePage(),
-  const ProfilePage(),
+  FavoritePage(),
+  ProfilePage(),
   const SettingsPage(),
 ];

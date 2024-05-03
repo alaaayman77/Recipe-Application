@@ -1,5 +1,6 @@
 
 import 'package:final_project/error_model/alert_dialog.dart';
+import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/settings_page/settings_container.dart';
 import 'package:final_project/settings_page/theming_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<AppConfigProvider>(context);
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -117,9 +119,14 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   void onYesPressed() {
+    var authProvider=Provider.of<ProviderAuth>(context,listen: false);
+    authProvider.myUser==null;
+    ProviderAuth.prefs.setBool('account',false);
+    setState(() {
+
+    });
     Navigator.of(context).popUntil(ModalRoute.withName(SignUp.routeName));
     Navigator.of(context).pushNamed(SignUp.routeName);
-
 
   }
 }
