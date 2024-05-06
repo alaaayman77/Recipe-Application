@@ -42,7 +42,7 @@ class RecipeDetails extends StatelessWidget {
                         icon: Icon(Icons.arrow_back_ios_new_rounded,
                             color: Colors.black),
                         onPressed: () {
-                          Navigator.of(context).pop(HomePage.routeName);
+                          Navigator.of(context).pop();
                         })),
               ),
               Padding(

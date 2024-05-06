@@ -41,16 +41,14 @@ late String uId;
   var authProvider;
   void _submitForm()async {
     if (_formKey.currentState!.validate()) {
-      String email = _emailController.text.trim();
+      // String email = _emailController.text.trim();
       // String password = _passwordController.text;
 
       FirebaseUtils.updateUserProfile(uid:uId,name:_usernameController.text);
       // _changePassword(_passwordController.text,_newPasswordController.text ,email);
       var User=await FirebaseUtils.readUser(uId);
       authProvider.updateNewUser(User);
-    Navigator.pop(context,{
-      'name':User?.userName
-    });
+    Navigator.pop(context,);
 
       Toast.show(
         "Changes Saved",
@@ -59,7 +57,7 @@ late String uId;
         backgroundColor: Theming.primary,
       );
 
-      print('Email: $email');
+      // print('Email: $email');
       // print('Password: $password');
     }
   }

@@ -26,9 +26,12 @@ class Instruction extends StatelessWidget{
            physics: NeverScrollableScrollPhysics(),
            itemCount: instructions?.length,
            itemBuilder: (context, index) {
+
              var instruction = instructions?[index];
+            //changed from object to list of steps
              var stepTexts = [];
              List<dynamic>? steps = instruction.steps;
+             print(instruction.steps);
              if (steps != null && steps.isNotEmpty) {
                stepTexts = steps.map((step) {
                  return 'Step ${step.number}\n${step.step}';

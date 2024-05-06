@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                 DefaultTabController(
                   length: dishTypes.length,
                   child: TabBar(
-                      indicator: null,
+                      indicator:null,
                       onTap: (index) {
                         selected = index;
                         setState(() {});
@@ -113,9 +113,7 @@ class _HomePageState extends State<HomePage> {
                       tabs: dishTypes
                           .map((source) => CustomTab(
                               selectedItem:
-                                  selected == dishTypes.indexOf(source)
-                                      ? true
-                                      : false,
+                                  selected == dishTypes.indexOf(source) ? true : false,
                               sources: dishTypes[dishTypes.indexOf(source)]))
                           .toList()),
                 ),
@@ -139,7 +137,7 @@ class _HomePageState extends State<HomePage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return GridView.builder(
-                      shrinkWrap: true,
+                      // shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 10,
                       itemBuilder: (context, index) => const HomeLoading(),
@@ -147,7 +145,6 @@ class _HomePageState extends State<HomePage> {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 10,
-                        childAspectRatio: 1,
                       ),
                     );
 

@@ -38,7 +38,7 @@ class _SimilarRecipeState extends State<SimilarRecipe> {
                gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 4,
-                childAspectRatio: 1,
+
               ),
             );
           }

@@ -4,8 +4,8 @@ class MyUser {
   String? id;
   String? userName;
   String? email;
-  String? image;
-  MyUser({required this.id,required this.email, required this.userName,this.image});
+  // String? image;
+  MyUser({required this.id,required this.email, required this.userName});
 
 
   Map<String,dynamic> toFireStore(){
@@ -13,15 +13,16 @@ class MyUser {
       'id':id,
       'name':userName,
       'email':email,
-      'image':image
+      // 'image':image
     };
   }
+
 
   MyUser.fromFireStore(Map<String,dynamic>?data):this(
       id: data?['id'],
       userName: data?['name'],
       email: data?['email'],
-      image:data?['image']
+      // image:data?['image']
   );
 
 }

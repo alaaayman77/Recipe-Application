@@ -28,7 +28,7 @@ class CustomSearch extends SearchDelegate {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    searchFieldDecorationTheme;
+    // searchFieldDecorationTheme;
     return ThemeData(
       scaffoldBackgroundColor: Theming.form,
       appBarTheme: AppBarTheme(
@@ -68,7 +68,7 @@ class CustomSearch extends SearchDelegate {
     return IconButton(
         // constraints: BoxConstraints.loose(Size.zero),
         onPressed: () {
-          Navigator.pop(context,HomePage.routeName);
+          Navigator.pop(context);
         },
         icon: Icon(
           Icons.arrow_back_ios_rounded,
@@ -79,20 +79,20 @@ class CustomSearch extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
 
-    @override
-    ThemeData appBarTheme(BuildContext context) {
-      searchFieldDecorationTheme;
-      return ThemeData(
-        scaffoldBackgroundColor: Theming.form,
-        backgroundColor: Theming.form,
-        appBarTheme: AppBarTheme(
-            toolbarHeight: MediaQuery
-                .sizeOf(context)
-                .height * 0.2,
-            elevation: 0,
-            color: Theming.form),
-      );
-    }
+    // @override
+    // ThemeData appBarTheme(BuildContext context) {
+    //   searchFieldDecorationTheme;
+    //   return ThemeData(
+    //     scaffoldBackgroundColor: Theming.form,
+    //     backgroundColor: Theming.form,
+    //     appBarTheme: AppBarTheme(
+    //         toolbarHeight: MediaQuery
+    //             .sizeOf(context)
+    //             .height * 0.2,
+    //         elevation: 0,
+    //         color: Theming.form),
+    //   );
+    // }
 
     if (query.isNotEmpty) {
       return SearchResults(query: query);

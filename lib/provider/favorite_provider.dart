@@ -6,10 +6,10 @@ import 'package:flutter/cupertino.dart';
 
 class FavoriteProvider extends ChangeNotifier{
   List<Recipes> recipes = [];
-  Future<void> getRecipesFromFireStore()async{
 
+  Future<void> getRecipesFromFireStore()async{
     QuerySnapshot<Recipes> querySnapshot= await FirebaseUtils.getRecipeCollection().get();
-    // List<QueryDocumentSnapshot<Recipes>> => list <task>
+    // List<QueryDocumentSnapshot<Recipes>> => list <Recipe>
     recipes=querySnapshot.docs.map((doc) {
       return doc.data();
     }).toList();
@@ -30,16 +30,18 @@ class FavoriteProvider extends ChangeNotifier{
   onClickedRecipe(Recipes recipe,bool isFavorite)async{
     if (isFavorite==false) {
       isFavorite=true;
-      await FirebaseUtils.addFavoriteRecipe(recipe).timeout(const Duration(seconds: 2), onTimeout: () {
-        print("added succefully"); // Prints "timeout" after 2 seconds.
-      });
+      await FirebaseUtils.addFavoriteRecipe(recipe);
+      //     .timeout(const Duration(seconds: 2), onTimeout: () {
+      //   print("added succefully"); // Prints "timeout" after 2 seconds.
+      // });
       await getRecipesFromFireStore();
 
     } else {
       isFavorite=false;
-      await FirebaseUtils.deleteFavoriteRecipe(recipe).timeout(const Duration(seconds: 2), onTimeout: () {
-        print("deleted succefully"); // Prints "timeout" after 2 seconds.
-      });
+      await FirebaseUtils.deleteFavoriteRecipe(recipe);
+      //     .timeout(const Duration(seconds: 2), onTimeout: () {
+      //   print("deleted succefully"); // Prints "timeout" after 2 seconds.
+      // });
       await getRecipesFromFireStore();
     }
   }

@@ -165,7 +165,6 @@ class _EditNewPasswordState extends State<EditNewPassword> {
     final user = await FirebaseAuth.instance.currentUser;
     final cred =
         EmailAuthProvider.credential(email: email, password: currentPassword);
-
     user?.reauthenticateWithCredential(cred).then((value) {
       user.updatePassword(newPassword).then((_) {
         ScaffoldMessenger.of(context).showSnackBar(

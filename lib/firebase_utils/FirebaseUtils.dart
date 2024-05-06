@@ -16,7 +16,6 @@ import 'package:provider/provider.dart';
 import '../Register/sign_in/sign_in.dart';
 
 class FirebaseUtils{
-  static const routeName='firebase';
 
   // method to get recipe collection from firebase
 
@@ -29,16 +28,17 @@ class FirebaseUtils{
       // come to you as object
       // snapshot => data
       // options firebase options if u want to add any options that firebase provide to u
-      fromFirestore: (snapshot, options) => Recipes.fromJson(snapshot.data()!),
+      fromFirestore: (snapshot, _) => Recipes.fromJson(snapshot.data()!),
       // go to firebase as map
-      toFirestore: (recipes, options) => recipes.toJson(),);
+      toFirestore: (recipes, _) => recipes.toJson(),);
 
   }
 
   static Future<void> addFavoriteRecipe(Recipes recipe){
-    var recipeCollection = getRecipeCollection();
-    var docRef = recipeCollection.doc(recipe.id.toString());
-    return docRef.set(recipe);
+    // var recipeCollection = getRecipeCollection();
+    // var docRef = recipeCollection.doc(recipe.id.toString());
+    // return docRef.set(recipe);
+    return getRecipeCollection().doc(recipe.id.toString()).set(recipe);
   }
 
   static Future<void> deleteFavoriteRecipe(Recipes recipe){
@@ -86,8 +86,8 @@ class FirebaseUtils{
   static  CollectionReference<MyUser> getUserCollection(){
     return FirebaseFirestore.instance.collection("users").withConverter<MyUser>
       (
-        fromFirestore: (snapshot, options) => MyUser.fromFireStore(snapshot.data()!),
-        toFirestore: (myUser, options) => myUser.toFireStore(),
+        fromFirestore: (snapshot, _) => MyUser.fromFireStore(snapshot.data()!),
+        toFirestore: (myUser, _) => myUser.toFireStore(),
     );
   }
 
@@ -102,11 +102,10 @@ class FirebaseUtils{
    return snapShot.data() ;
  }
 
- static Future<void> updateUserProfile({required String uid,String name='',String? image})async{
+ static Future<void> updateUserProfile({required String uid,String name=''})async{
    var snapshot= await getUserCollection().doc(uid).update(
-     {"name":name,
-       "image":image
-
+     {
+       "name":name,
      }
    );
 

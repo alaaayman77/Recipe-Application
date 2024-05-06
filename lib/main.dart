@@ -31,7 +31,6 @@ void main()async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // await Firebase.initializeApp();
   await AppConfigProvider.init();
   await ProviderAuth.init();
   // await Firebase.initializeApp();

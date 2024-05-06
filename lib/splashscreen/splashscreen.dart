@@ -16,10 +16,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(
-      Duration(seconds:3),
-          () => Navigator.pushReplacementNamed(context,ProviderAuth.checkLogin==false?IntroductionScreen.routeName:Transition.routeName)
-
-    );
+        Duration(seconds: 3),
+        () => Navigator.pushReplacementNamed(
+            context,
+            ProviderAuth.checkLogin == false
+                ? IntroductionScreen.routeName
+                : Transition.routeName));
   }
 
   @override
@@ -36,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 300,
             ),
             SizedBox(height: 20),
-
           ],
         ),
       ),

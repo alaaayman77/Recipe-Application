@@ -18,6 +18,7 @@ class saveItem extends StatefulWidget {
 class _saveItemState extends State<saveItem> {
   bool isFavorite = false;
   @override
+
   void didChangeDependencies() {
     super.didChangeDependencies();
     var provider = Provider.of<FavoriteProvider>(context,listen: false);
@@ -28,7 +29,6 @@ class _saveItemState extends State<saveItem> {
     }
     isFavorite = provider.checkExist(widget.recipe!);
   }
-  // bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
