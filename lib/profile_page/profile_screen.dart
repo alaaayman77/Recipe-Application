@@ -13,21 +13,21 @@ import '../theming.dart';
 import 'edit.dart';
 
 import 'dart:typed_data';
-import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 
 
 
 class ProfileScreen extends StatefulWidget {
 
   static const routeName ="ProfileScreen";
-  ProfileScreen(
-      {Key? key,required this.obsucre})
-      : super(key: key);
+
  String? uId;
   String? name ;
   String? email;
   String? pass;
-  bool obsucre;
+
+  ProfileScreen({super.key});
+  // bool obsucre;
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
@@ -139,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           "name": '${widget.name}',
                           "email": '${widget.email}',
                           "password": '${widget.pass}',
-                          "obsucre": widget.obsucre,
+                          // "obsucre": widget.obsucre,
                         },
                       );
 

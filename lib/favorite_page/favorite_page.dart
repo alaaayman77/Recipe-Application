@@ -27,8 +27,6 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget build(BuildContext context) {
     // final arguments = (ModalRoute.of(context)?.settings.arguments)as Map;
 
-
-
     var provider = Provider.of<FavoriteProvider>(context);
     if(provider.recipes.isEmpty)
       {

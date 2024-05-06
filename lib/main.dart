@@ -9,7 +9,6 @@ import 'package:final_project/home_page/home_page.dart';
 import 'package:final_project/introduction_screen/IntroductionScreen.dart';
 import 'package:final_project/profile_page/EditNewPassword.dart';
 import 'package:final_project/profile_page/edit.dart';
-import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/profile_page/profile_screen.dart';
 import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/provider/app_config_provider.dart';
@@ -71,7 +70,7 @@ class MyApp extends StatelessWidget {
               ForgotPassword.routeName: (context) => ForgotPassword(),
               Transition.routeName: (context) =>  Transition(),
               FavoritePage.routeName: (context) => FavoritePage(),
-              ProfilePage.routeName: (context) =>  ProfilePage(),
+              ProfileScreen.routeName: (context) =>  ProfileScreen(),
               HomePage.routeName: (context) =>  HomePage(),
               SettingsPage.routeName: (context) =>  SettingsPage(),
               RecipeDetails.routeName: (context) => RecipeDetails(),
@@ -81,7 +80,7 @@ class MyApp extends StatelessWidget {
             },
             theme: Theming.lightTheme,
             darkTheme: Theming.darkTheme,
-            themeMode: provider.appTheme,
+            themeMode: provider.  appTheme,
 
           );
         },

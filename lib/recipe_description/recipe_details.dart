@@ -16,6 +16,7 @@ class RecipeDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     args = ModalRoute.of(context)!.settings.arguments as Recipes;
+
     List<dynamic>? ingredients = args?.extendedIngredients;
     List<dynamic>? instructions = args?.analyzedInstructions;
 

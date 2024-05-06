@@ -1,4 +1,3 @@
-import 'package:final_project/profile_page/profile_page.dart';
 import 'package:final_project/profile_page/profile_screen.dart';
 import 'package:final_project/provider/Auth_Provider.dart';
 import 'package:final_project/provider/app_config_provider.dart';
@@ -165,6 +164,7 @@ class _EditNewPasswordState extends State<EditNewPassword> {
     final user = await FirebaseAuth.instance.currentUser;
     final cred =
         EmailAuthProvider.credential(email: email, password: currentPassword);
+
     user?.reauthenticateWithCredential(cred).then((value) {
       user.updatePassword(newPassword).then((_) {
         ScaffoldMessenger.of(context).showSnackBar(

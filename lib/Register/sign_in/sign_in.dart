@@ -23,8 +23,8 @@ class SignIn extends StatefulWidget {
 
 class LoginScreenState extends State<SignIn> {
   final formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController(text:'Ahmed@gmail.com');
-  TextEditingController passwordController = TextEditingController(text: '123456');
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool isChecked = false; // the right place :)
   void submitForm() {
     if (formKey.currentState!.validate()) {
